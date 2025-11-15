@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scRNA-seq Methods - AI in Transcriptomics</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI in Transcriptomics</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Task-specific Methods</a>
+                    <div class="dropdown-content">
+                        <a href="scrna-seq-methods.html">scRNA-seq Methods</a>
+                        <a href="st-methods.html">ST Methods</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Advanced Paradigms</a>
+                    <div class="dropdown-content">
+                        <a href="foundation-models.html">Foundation Models</a>
+                        <a href="ai-agents.html">AI Agents</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="more.html" class="nav-link">More</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">scRNA-seq Task-specific Methods</h1>
+        <p class="page-description">
+            Our review encompasses 70+ task-specific methods developed specifically for single-cell RNA sequencing analysis. 
+            These methods span key analytical workflows including dimensionality reduction, batch effect correction, cell clustering, cell annotation, 
+            trajectory inference, and gene regulatory network inference. The following statistics provide an overview of the methodological landscape.
+        </p>
+
+        <!-- Statistics Section -->
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Distribution by Supervision Type</h3>
+            <img src="../assets/images/figureA1.png" alt="Distribution by Supervision Type" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Installation & Tutorial Availability</h3>
+            <img src="../assets/images/figureA2.png" alt="Installation & Tutorial Availability" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+        <p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+            <strong>Key Insights:</strong> Approximately 78% of scRNA-seq methods adopt unsupervised or self-supervised paradigms, highlighting a preference for
+            discovering intrinsic cellular patterns instead of relying on extensive labeled references. Reproducibility is improving but not universal&mdash;47 of 74 tools (63.5%)
+            ship with both installation instructions and tutorials, so users still need to validate setup details for roughly one-third of the catalog.
+        </p>
+
+        <!-- Table Section -->
+        <div class="table-container" id="table-a">
+            <h2>Table A: Reproducibility Checklist for scRNA-seq Methods</h2>
+            <p style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>Column Descriptions:</strong> Method - Tool/algorithm name | Application - Primary analytical task(s) | Supervision - Learning paradigm used | 
+                Code - GitHub or alternative repository link | Installation - Availability of setup instructions | Tutorials - Availability of user guides
+            </p>
+            <div id="tableContent" style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Application</th>
+                            <th>Supervision</th>
+                            <th>Code</th>
+                            <th>Installation</th>
+                            <th>Tutorials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>scVI</strong></td><td>Dimensionality reduction/Batch effect correction/Cross-Species Analysis/Cell clustering</td><td>unsupervised</td><td><a href="https://github.com/scverse/scvi-tools" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGNN</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/juexinwang/scGNN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GeneCompass</strong></td><td>Cross-Species Analysis</td><td>self-supervised</td><td><a href="https://github.com/xCompass-AI/GeneCompass" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGAE</strong></td><td>Dimensionality reduction</td><td>unsupervised</td><td><a href="https://github.com/ZixiangLuo1161/scGAE" target="_blank">Link</a></td><td></td><td>Yes</td></tr>
+                        <tr><td><strong>scVGAE</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/inoue0426/scVGAE-paper" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>DeepImpute</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/lanagarmire/deepimpute" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>DCA</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/theislab/dca" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>AutoClass</strong></td><td>Denoising and imputation</td><td>self-supervised</td><td><a href="https://github.com/datapplab/AutoClass" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scDHA</strong></td><td>Denoising and imputation/Cell clustering</td><td>unsupervised</td><td><a href="https://github.com/duct317/scDHA" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>SERM</strong></td><td>Denoising and imputation</td><td>unsupervised/self-consistency driven</td><td><a href="https://github.com/xinglab-ai/self-consistent-expression-recovery-machine" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>scNET</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/madilabcode/scNET" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CNNImpute</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td></td><td></td><td></td></tr>
+                        <tr><td><strong>scAMF</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/zhigang-yao/scAMF" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>DGAN</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/dikshap11/DGAN" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>ZILLNB</strong></td><td>Denoising and imputation/Batch effect correction/Cell clustering</td><td>unsupervised</td><td><a href="https://github.com/tianyingw/ZILLNB" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>UniVI</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/Ashford-A/UniVI" target="_blank">Link</a></td><td></td><td>Yes</td></tr>
+                        <tr><td><strong>SCDD</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/lyotvincent/SCDD" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>scIDPMs</strong></td><td>Denoising and imputation</td><td>unsupervised</td><td><a href="https://github.com/zhangzq2406/scIDPMs" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scMEDAL</strong></td><td>Batch effect correction</td><td>unsupervised</td><td></td><td></td><td></td></tr>
+                        <tr><td><strong>ABC</strong></td><td>Batch effect correction</td><td>semi-supervised</td><td><a href="https://github.com/reutd/ABC" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CarDEC</strong></td><td>Batch effect removal/Cell clustering</td><td>self-supervised</td><td><a href="https://github.com/jlakkis/CarDEC" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DESC</strong></td><td>Batch effect correction/Cell clustering</td><td>unsupervised</td><td><a href="https://github.com/eleozzr/desc" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepBID</strong></td><td>Batch effect correction</td><td>unsupervised</td><td><a href="https://github.com/shaoqiangzhang/DeepBID" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>ResPAN</strong></td><td>Batch effect correction</td><td>unsupervised</td><td><a href="https://github.com/AprilYuge/ResPAN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scDML</strong></td><td>Batch effect correction</td><td>self-supervised</td><td><a href="https://github.com/eleozzr/scDML" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>BERMAD</strong></td><td>Batch effect correction</td><td>self-supervised</td><td><a href="https://github.com/zhanglabNKU/BERMAD" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Portal</strong></td><td>Batch effect correction</td><td>unsupervised</td><td><a href="https://github.com/YangLabHKUST/Portal" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>deepMNN</strong></td><td>Batch effect correction</td><td>self-supervised</td><td><a href="https://github.com/zoubin-ai/deepMNN" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>STACAS</strong></td><td>Batch effect correction</td><td>semi-supervised</td><td><a href="https://github.com/carmonalab/STACAS" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scVAE</strong></td><td>Cell clustering</td><td>unsupervised</td><td><a href="https://github.com/scvae/scvae" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scDeepCluster</strong></td><td>Cell clustering</td><td>unsupervised</td><td><a href="https://github.com/ttgump/scDeepCluster_pytorch" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cell BLAST</strong></td><td>Cell annotation</td><td>unsupervised</td><td><a href="https://github.com/gao-lab/Cell_BLAST" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>scSemiCluster</strong></td><td>Cell annotation</td><td>semi-supervised</td><td><a href="https://github.com/xuebaliang/scSemiCluster" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scBalance</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/yuqcheng/scBalance" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scTab</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/theislab/scTab/tree/devel" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scVQC</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/yusri-dh/scVQC" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scNym</strong></td><td>Cell annotation</td><td>semi-supervised</td><td><a href="https://github.com/calico/scnym" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CAMLU</strong></td><td>Cell annotation</td><td>semi-supervised</td><td><a href="https://github.com/ziyili20/CAMLU" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>TripletCell</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/liuyan3056/TripletCell" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scDeepSort</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/ZJUFanLab/scDeepSort" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>mtANN</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/Zhangxf-ccnu/mtANN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGAD</strong></td><td>Cell annotation</td><td>semi-supervised & self-supervised</td><td><a href="https://github.com/aimeeyaoyao/scGAD" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>cellassign</strong></td><td>Cell annotation</td><td>weakly supervised</td><td><a href="https://github.com/crazyhottommy/scRNAseq-analysis-notes" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Celler</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/AI4science-ym/HiCeller" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scMMT</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/SongqiZhou/scMMT" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>TOSICA</strong></td><td>Cell annotation</td><td>supervised</td><td><a href="https://github.com/JackieHanLab/TOSICA" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>RegFormer</strong></td><td>Cell annotation</td><td>self-supervised</td><td><a href="https://github.com/BGIResearch/RegFormer" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GPTCelltype</strong></td><td>Cell annotation</td><td>self-supervised</td><td><a href="https://github.com/Winnie09/GPTCelltype" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepVelo</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>self-supervised</td><td><a href="https://github.com/bowang-lab/DeepVelo" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>VeloVI</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>unsupervised</td><td><a href="https://github.com/YosefLab/velovi" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scTour</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>unsupervised</td><td><a href="https://github.com/LiQian-XC/sctour" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>VITAE</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>unsupervised</td><td><a href="https://github.com/jaydu1/VITAE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>TrajectoryNet</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>unsupervised</td><td><a href="https://github.com/KrishnaswamyLab/TrajectoryNet" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>TIGON</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>unsupervised</td><td><a href="https://github.com/yutongo/TIGON" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GeneTrajectory</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>unsupervised</td><td><a href="https://github.com/KlugerLab/GeneTrajectory" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepSEM</strong></td><td>GRN inference</td><td>unsupervised</td><td><a href="https://github.com/HantaoShu/DeepSEM" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CellOracle</strong></td><td>GRN inference</td><td>unsupervised</td><td><a href="https://github.com/morris-lab/CellOracle" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>LINGER</strong></td><td>GRN inference</td><td>unsupervised</td><td><a href="https://github.com/Durenlab/LINGER" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scMultiomeGRN</strong></td><td>GRN inference</td><td>semi-supervised</td><td><a href="https://zenodo.org/records/14848389" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scMTNI</strong></td><td>GRN inference</td><td>unsupervised</td><td><a href="https://github.com/Roy-lab/scMTNI" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GRN-VAE</strong></td><td>GRN inference</td><td>unsupervised</td><td><a href="https://bcb.cs.tufts.edu/DAZZLE/" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GRANGER</strong></td><td>GRN inference</td><td>unsupervised</td><td><a href="https://github.com/shaoqiangzhang/GRANGER" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGeneRAI</strong></td><td>GRN inference</td><td>unsupervised/self-supervised</td><td><a href="https://github.com/PhGK/scGeneRAI" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scGREAT / InfoSEM</strong></td><td>GRN inference</td><td>supervised</td><td><a href="https://github.com/WangyuchenCS/scGREAT/tree/v1.0.0" target="_blank">Link</a></td><td></td><td>Yes</td></tr>
+                        <tr><td><strong>scRegNet</strong></td><td>GRN inference</td><td>supervised</td><td><a href="https://github.com/sindhura-cs/scRegNet" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>DigNet / RegDiffusion</strong></td><td>GRN inference</td><td>unsupervised</td><td><a href="https://github.com/zpliulab/DigNet" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CACIMAR</strong></td><td>Cross-Species Analysis</td><td>self-supervised / unsupervised</td><td><a href="https://github.com/jiang-junyao/CACIMAR" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Nvwa</strong></td><td>Cross-Species Analysis</td><td>self-supervised / unsupervised</td><td><a href="https://github.com/JiaqiLiZju/Nvwa/" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>CAME</strong></td><td>Cross-Species Analysis</td><td>self-supervised / unsupervised</td><td><a href="https://github.com/zhanglabtools/CAME" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SATURN</strong></td><td>Cross-Species Analysis</td><td>weakly supervised</td><td><a href="https://github.com/snap-stanford/saturn" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scAMAC</strong></td><td>Cell clustering</td><td>self-supervised</td><td><a href="https://github.com/yancy2024/scAMAC" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scSMD</strong></td><td>Cell clustering</td><td>self-supervised /unsupervised</td><td><a href="https://github.com/xiaoxuc/scSMD" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GRNFormer</strong></td><td>GRN inference</td><td>semi-supervised</td><td><a href="https://github.com/BioinfoMachineLearning/GRNformer" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        <!-- Additional Info -->
+        <div class="table-container">
+            <h2>📊 Analysis Summary</h2>
+            <ul style="list-style-position: inside; line-height: 2;">
+                <li><strong>Total Methods Reviewed:</strong> 74</li>
+                <li><strong>Primary Applications:</strong> Dimensionality Reduction, Batch Effect Correction, Cell Clustering, Cell Annotation, Trajectory Inference, GRN Inference</li>
+                <li><strong>Supervision Paradigms:</strong> Unsupervised, Self-supervised, Semi-supervised, Supervised, Weakly-supervised</li>
+                <li><strong>Code Availability:</strong> 71/74 (96%) of methods link to public repositories</li>
+                <li><strong>Installation Guidance:</strong> 55/74 (74%) provide installation steps, 50/74 (68%) include tutorials, and 47/74 (64%) offer both</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AI in Transcriptomics Review</p>
+        <p><a href="more.html">Contact & More Information</a></p>
+    </footer>
+
+    <script>
+        // Charts replaced with actual figure images
+    </script>
+</body>
+</html>
+
+

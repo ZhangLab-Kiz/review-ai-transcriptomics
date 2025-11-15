@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ST Methods - AI in Transcriptomics</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI in Transcriptomics</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Task-specific Methods</a>
+                    <div class="dropdown-content">
+                        <a href="scrna-seq-methods.html">scRNA-seq Methods</a>
+                        <a href="st-methods.html">ST Methods</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Advanced Paradigms</a>
+                    <div class="dropdown-content">
+                        <a href="foundation-models.html">Foundation Models</a>
+                        <a href="ai-agents.html">AI Agents</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="more.html" class="nav-link">More</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">Spatial Transcriptomics (ST) Task-specific Methods</h1>
+        <p class="page-description">
+            Spatial transcriptomics has emerged as a powerful technology for profiling gene expression while preserving tissue architecture. 
+            Our review identifies 49 specialized methods designed for spatial transcriptomics analysis, addressing unique challenges such as 
+            spatial clustering, cell segmentation, spatially variable gene identification, and deconvolution of spatial spots. 
+            The following statistics highlight the landscape of spatial transcriptomics methodologies.
+        </p>
+
+        <!-- Statistics Section -->
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Distribution by Learning Paradigm</h3>
+            <img src="../assets/images/figureB1.png" alt="Distribution by Learning Paradigm" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Installation & Tutorial Availability</h3>
+            <img src="../assets/images/figureB2.png" alt="Installation & Tutorial Availability" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+        <p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+            <strong>Key Insights:</strong> Spatial transcriptomics workflows split their learning paradigms fairly evenly: unsupervised plus self-supervised strategies cover 27 of 49 tools (~55%),
+            while the remainder rely on semi-supervised or fully supervised supervision to inject spatial priors. Documentation quality is high&mdash;46 methods (94%) share installation steps and
+            42 (86%) pair them with tutorials, so most practitioners can onboard quickly.
+        </p>
+
+        <!-- Table Section -->
+        <div class="table-container" id="table-b">
+            <h2>Table B: Reproducibility Checklist for Spatial Transcriptomics Methods</h2>
+            <p style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>Column Descriptions:</strong> Method - Tool/algorithm name | Application - Primary analytical task(s) | Supervision - Learning paradigm used | 
+                Code - GitHub or alternative repository link | Installation - Availability of setup instructions | Tutorials - Availability of user guides
+            </p>
+            <div id="tableContent" style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Application</th>
+                            <th>Supervision</th>
+                            <th>Code</th>
+                            <th>Installation</th>
+                            <th>Tutorials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>BLEEP</strong></td><td>Denoising and Imputation</td><td>self-supervised</td><td><a href="https://github.com/bowang-lab/BLEEP" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>stDCL</strong></td><td>Denoising and Imputation</td><td>self-supervised</td><td><a href="https://github.com/Philyzh8/stDCL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>stImpute</strong></td><td>Denoising and Imputation</td><td>self-supervised</td><td><a href="https://github.com/cquzys/stImpute" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaHDmap</strong></td><td>Dimensionality Reduction</td><td>self-supervised</td><td><a href="https://github.com/XiDsLab/SpaHDmap" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STAMP</strong></td><td>Dimensionality Reduction</td><td>unsupervised</td><td><a href="https://github.com/JinmiaoChenLab/scTM" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SPADE</strong></td><td>Spatial clustering</td><td>self-supervised</td><td><a href="https://github.com/mexchy1000/spade" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GASTON</strong></td><td>Identification of SVGs</td><td>self-supervised</td><td><a href="https://github.com/raphael-group/GASTON" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>PROST</strong></td><td>Identification of SVGs</td><td>unsupervised</td><td><a href="https://github.com/Tang-Lab-super/PROST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GAADE</strong></td><td>Identification of SVGs</td><td>unsupervised</td><td><a href="https://github.com/Nefu-Hao/GAADE/tree/main" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>STAIG</strong></td><td>Spatial Clustering</td><td>self-supervised</td><td><a href="https://github.com/y-itao/STAIG" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaGCN</strong></td><td>Spatial Clustering</td><td>unsupervised</td><td><a href="https://github.com/jianhuupenn/SpaGCN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GraphST</strong></td><td>Spatial Clustering</td><td>self-supervised</td><td><a href="https://github.com/JinmiaoChenLab/GraphST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STAGATE</strong></td><td>Spatial Clustering</td><td>unsupervised</td><td><a href="https://github.com/zhanglabtools/STAGATE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>ResST</strong></td><td>Spatial Clustering</td><td>self-supervised</td><td><a href="https://github.com/StickTaTa/ResST_main" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepST</strong></td><td>Spatial Clustering</td><td>unsupervised</td><td><a href="https://github.com/JiangBioLab/DeepST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SPACEL</strong></td><td>Deconvolution of Spatial Spots</td><td>semi-supervised</td><td><a href="https://github.com/QuKunLab/SPACEL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STMSGAL</strong></td><td>Spatial Clustering</td><td>self-supervised</td><td><a href="https://github.com/plhhnu/STMSGAL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>MAFN</strong></td><td>Spatial Clustering</td><td>unsupervised</td><td><a href="https://github.com/zhubbbzhu/MAFN/tree/master/MAFN" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>STAGUE</strong></td><td>Spatial Clustering</td><td>unsupervised</td><td><a href="https://github.com/deepomicslab/STAGUE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>conST</strong></td><td>Spatial Clustering</td><td>self-supervised</td><td><a href="https://github.com/ys-zong/conST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>stMVC</strong></td><td>Spatial Clustering</td><td>semi-supervised</td><td><a href="https://github.com/cmzuo11/stMVC" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SiGra</strong></td><td>Spatial Clustering</td><td>self-supervised</td><td><a href="https://github.com/QSong-github/SiGra" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaGT</strong></td><td>Spatial Clustering</td><td>unsupervised</td><td><a href="https://github.com/xy428/SpaGT" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Focus Framework</strong></td><td>Cell Type Annotation</td><td>semi-supervised</td><td><a href="https://github.com/OmicsML/focus" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>Spatial-ID</strong></td><td>Cell Type Annotation</td><td>supervised</td><td><a href="https://github.com/TencentAILabHealthcare/spatialID" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>SPANN</strong></td><td>Cell Type Annotation</td><td>supervised</td><td><a href="https://github.com/ddb-qiwang/SPANN-torch" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scBOL</strong></td><td>Cell Type Annotation</td><td>semi-supervised</td><td><a href="https://github.com/aimeeyaoyao/scBOL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STELLAR</strong></td><td>Cell Type Annotation</td><td>semi-supervised</td><td><a href="https://github.com/snap-stanford/stellar" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaDecon</strong></td><td>Deconvolution of Spatial Spots</td><td>semi-supervised</td><td><a href="https://github.com/kpcoleman/SpaDecon" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SD2</strong></td><td>Deconvolution of Spatial Spots</td><td>semi-supervised</td><td><a href="https://github.com/leihouyeung/SD2" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>STdGCN</strong></td><td>Deconvolution of Spatial Spots</td><td>semi-supervised</td><td><a href="https://github.com/luoyuanlab/stdgcn" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SPADE</strong></td><td>Deconvolution of Spatial Spots</td><td>supervised</td><td><a href="https://github.com/anlingUA/SPADE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CLPLS</strong></td><td>Deconvolution of Spatial Spots</td><td>self-supervised</td><td><a href="https://github.com/LindsayMo/CLPLS_package" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpatialcoGCN</strong></td><td>Deconvolution of Spatial Spots</td><td>self-supervised</td><td><a href="https://github.com/wwYinYin/SpatialcoGCN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>LETSmix</strong></td><td>Deconvolution of Spatial Spots</td><td>supervised</td><td><a href="https://github.com/ZhanYangen/LETSmix/" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STdeconvolve</strong></td><td>Deconvolution of Spatial Spots</td><td>unsupervised</td><td><a href="https://github.com/JEFworks-Lab/STdeconvolve" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STRIDE</strong></td><td>Deconvolution of Spatial Spots</td><td>unsupervised</td><td><a href="https://github.com/wanglabtongji/STRIDE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SMART</strong></td><td>Deconvolution of Spatial Spots</td><td>semi-supervised</td><td><a href="https://github.com/yyolanda/SMART" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cellpose</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/mouseland/cellpose" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cellpose2.0</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/mouseland/cellpose" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cellpose3</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/mouseland/cellpose" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>BIDCell</strong></td><td>Cell Segmentation</td><td>self-supervised</td><td><a href="https://github.com/SydneyBioX/BIDCell" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SCS</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/chenhcs/SCS" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>UCS</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/YangLabHKUST/UCS" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Segger</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/EliHei2/segger_dev" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>JSTA</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/wollmanlab/JSTA" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CelloType</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/tanlabcode/CelloType" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>FICTURE</strong></td><td>Cell Segmentation</td><td>unsupervised</td><td><a href="https://github.com/seqscope/ficture" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GeneSegNet</strong></td><td>Cell Segmentation</td><td>supervised</td><td><a href="https://github.com/BoomStarcuc/GeneSegNet" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        <!-- Additional Info -->
+        <div class="table-container">
+            <h2>📊 Analysis Summary</h2>
+            <ul style="list-style-position: inside; line-height: 2;">
+                <li><strong>Total Methods Reviewed:</strong> 49</li>
+                <li><strong>Primary Applications:</strong> Spatial Clustering, Cell Segmentation, Cell Type Annotation, Deconvolution, SVG Identification, Dimensionality Reduction</li>
+                <li><strong>Supervision Paradigms:</strong> Unsupervised, Self-supervised, Semi-supervised, Supervised</li>
+                <li><strong>Code Availability:</strong> 49/49 (100%) methods link to public repositories</li>
+                <li><strong>Installation Support:</strong> 46/49 (94%) document installation steps and 42/49 (86%) supply tutorials (all 42 provide both)</li>
+                <li><strong>Notable Applications:</strong> Spatial clustering is the most common application (20+ methods), followed by cell segmentation (10+ methods)</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AI in Transcriptomics Review</p>
+        <p><a href="more.html">Contact & More Information</a></p>
+    </footer>
+
+    <script>
+        // Charts replaced with actual figure images
+    </script>
+</body>
+</html>
+
