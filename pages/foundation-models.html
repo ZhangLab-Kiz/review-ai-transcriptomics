@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Models - AI in Transcriptomics</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI in Transcriptomics</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Task-specific Methods</a>
+                    <div class="dropdown-content">
+                        <a href="scrna-seq-methods.html">scRNA-seq Methods</a>
+                        <a href="st-methods.html">ST Methods</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Advanced Paradigms</a>
+                    <div class="dropdown-content">
+                        <a href="foundation-models.html">Foundation Models</a>
+                        <a href="ai-agents.html">AI Agents</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="more.html" class="nav-link">More</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">Foundation Models in Transcriptomics</h1>
+        <p class="page-description">
+            Foundation models represent a paradigm shift in transcriptomics analysis, leveraging large-scale pre-training on diverse cellular datasets 
+            to achieve exceptional generalization across different cell types, tissues, and experimental conditions. 
+            These models are characterized by their ability to learn universal representations of gene expression from massive datasets containing millions to billions of cells. 
+            Our review identifies 24 prominent foundation models spanning from small efficient models (6M parameters) to large-scale models (1.08B parameters).
+        </p>
+
+        <!-- Overview Chart -->
+        <div class="stats-container">
+            <div class="stat-chart" style="grid-column: 1 / -1;">
+                <h3>Foundation Models: Scale Analysis (Model Parameters vs Training Data)</h3>
+                <img src="../assets/images/figureC.png" alt="Foundation Models Scale Analysis" style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+        </div>
+
+        <p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+            <strong>Key Insights:</strong> Foundation models in transcriptomics range from 5.2M-parameter HEIST to the 27B-parameter C2S-Scale, illustrating how differently teams trade off model capacity versus deployability.
+            Packaging is improving&mdash;19 of 24 models (79%) are pip-installable&mdash;yet the training burden still spans from roughly 60 GPU-hours (scFoundation) to 147,456 GPU-hours (CellFM) and training corpora stretch from 0.575M to 116M cells.
+            Roughly 79% of models provide pretrained weights, allowing labs to reuse representations without repeating the most expensive training stages.
+        </p>
+
+
+
+        <!-- Table Section -->
+        <div class="table-container" id="table-c">
+            <h2>Table C: Foundation Models in scRNA-seq and Spatial Transcriptomics</h2>
+            <p style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>Column Descriptions:</strong> Method - Model name | #Params - Model parameters (millions/billions) | Training Data - Scale of training dataset | 
+                GPU Hours - Computational cost for training | GPU Memory - Hardware requirements | Inference Cost - Resource requirements for inference | 
+                Pretrained Weights - Availability of pre-trained models | Installation - Setup method | Code - Repository link
+                <br><strong>Note:</strong> * indicates parameters estimated from model architecture described in publications rather than explicitly stated values.
+            </p>
+            <div id="tableContent" style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>#Params</th>
+                            <th>Training Data</th>
+                            <th>GPU Hours</th>
+                            <th>GPU Memory</th>
+                            <th>Pretrained Weights</th>
+                            <th>Installation</th>
+                            <th>Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nicheformer</strong></td>
+                            <td>49.3M</td>
+                            <td>110M cells</td>
+                            <td>2,880</td>
+                            <td>12×A100 (40GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/theislab/nicheformer" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>stFormer</strong></td>
+                            <td>71.4M*</td>
+                            <td>4.1M cells</td>
+                            <td>960</td>
+                            <td>4×RTX 3090 (24GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/csh3/stFormer" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>OmiCLIP</strong></td>
+                            <td>599M*</td>
+                            <td>2.2M pairs</td>
+                            <td>—</td>
+                            <td>1×A100 (80GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/GuangyuWangLab2021/Loki" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CELLama</strong></td>
+                            <td>33M</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/portrai-io/CELLama" target="_blank">GitHub</a></td>
+                        </tr>
+                                                <tr>
+                            <td><strong>ST-Align</strong></td>
+                            <td>—</td>
+                            <td>1.3M spot-niche pairs</td>
+                            <td>—</td>
+                            <td>3×A800 (40GB)</td>
+                            <td>No</td>
+                            <td>—</td>
+                            <td><a href="https://github.com/dumbgoos/ST-Align" target="_blank">GitHub</a></td>
+                        </tr>
+                        </tr>
+                                                <tr>
+                            <td><strong>HEIST</strong></td>
+                            <td>5.2M*</td>
+                            <td>22.3M cells</td>
+                            <td>72</td>
+                            <td>4×L40 (48GB)</td>
+                            <td>No</td>
+                            <td>source</td>
+                            <td><a href="https://anonymous.4open.science/r/HEIST-E3F8" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>scGPT-spatial</strong></td>
+                            <td>50M*</td>
+                            <td>30M cells/spots</td>
+                            <td>—</td>
+                            <td>4×A100 (80GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/bowang-lab/scGPT-spatial" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SToFM</strong></td>
+                            <td>45M*</td>
+                            <td>88M cells + 2k ST slices</td>
+                            <td>1,920</td>
+                            <td>4×A100 (80GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/PharMolix/SToFM" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>scGPT</strong></td>
+                            <td>50M</td>
+                            <td>33M cells</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/bowang-lab/scGPT" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>scBERT</strong></td>
+                            <td>10M</td>
+                            <td>1.1M cells</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/TencentAILabHealthcare/scBERT" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Geneformer</strong></td>
+                            <td>30M</td>
+                            <td>30M cells</td>
+                            <td>864</td>
+                            <td>12×V100 (32GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/jkobject/geneformer" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>GeneCompass</strong></td>
+                            <td>142M</td>
+                            <td>101.8M cells</td>
+                            <td>6,912</td>
+                            <td>32×A800</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/xCompass-AI/GeneCompass" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CellFM</strong></td>
+                            <td>800M</td>
+                            <td>102M cells</td>
+                            <td>147,456</td>
+                            <td>8×Ascend 910</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/biomed-AI/CellFM" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>GeneMamba</strong></td>
+                            <td>65.7M</td>
+                            <td>30M cells</td>
+                            <td>2,016</td>
+                            <td>4×A100 (80GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/Anonymous324-star/GeneMamba" target="_blank">GitHub</a></td>
+                        </tr>
+                             </tr>
+                                                <tr>
+                            <td><strong>scHyena</strong></td>
+                            <td>27.7M</td>
+                            <td>0.575M cells</td>
+                            <td>168</td>
+                            <td>2×RTX 3090</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TranscriptFormer</strong></td>
+                            <td>1.08B</td>
+                            <td>112M cells</td>
+                            <td>—</td>
+                            <td>1000×H100</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/czi-ai/transcriptformer" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>scCello</strong></td>
+                            <td>49.3M</td>
+                            <td>110M cells</td>
+                            <td>192</td>
+                            <td>4×A100 (40GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/DeepGraphLearning/scCello" target="_blank">GitHub</a></td>
+                        </tr>
+                               <tr>
+                            <td><strong>Bio-DTA</strong></td>
+                            <td>11.4M</td>
+                            <td>33.4M pairs</td>
+                            <td>672</td>
+                            <td>4×A10G (24GB)</td>
+                            <td>No</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C2S-Scale</strong></td>
+                            <td>27B</td>
+                            <td>50M cells</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/vandijklab/cell2sentence" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SCimilarity</strong></td>
+                            <td>62.3M</td>
+                            <td>7.9M cells</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/Genentech/scimilarity" target="_blank">GitHub</a></td>
+                        </tr>
+                                <tr>
+                            <td><strong>scFoundation</strong></td>
+                            <td>100M</td>
+                            <td>50M cells</td>
+                            <td>60</td>
+                            <td>64×A100 (80GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/biomap-research/scFoundation" target="_blank">GitHub</a></td>
+                        </tr>
+                                                <tr>
+                            <td><strong>TEDDY</strong></td>
+                            <td>414M</td>
+                            <td>116M cells</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>No</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tabula</strong></td>
+                            <td>6M</td>
+                            <td>15M cells</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/aristoteleo/tabula" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>UCE</strong></td>
+                            <td>650M</td>
+                            <td>36M cells</td>
+                            <td>23,040</td>
+                            <td>X A100 (80GB)</td>
+                            <td>Yes</td>
+                            <td>pip</td>
+                            <td><a href="https://github.com/snap-stanford/UCE" target="_blank">GitHub</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="table-container">
+            <h2>📊 Foundation Models Summary</h2>
+            <ul style="list-style-position: inside; line-height: 2;">
+                <li><strong>Total Foundation Models Reviewed:</strong> 24</li>
+                <li><strong>Model Size Range:</strong> 5.2M - 27B parameters</li>
+                <li><strong>Training Data Range:</strong> 0.575M - 116M cells</li>
+                <li><strong>GPU Training Hours Range:</strong> 60 - 147,456 hours</li>
+                <li><strong>Pretrained Weights Available:</strong> 79% (19/24 models)</li>
+                <li><strong>Installation via pip:</strong> 79.2% (19/24 models)</li>
+                <li><strong>Key Innovation Areas:</strong> Cross-modal learning (OmiCLIP), Language integration (C2S-Scale, TranscriptFormer), Sequence modeling (GeneMamba)</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AI in Transcriptomics Review</p>
+        <p><a href="more.html">Contact & More Information</a></p>
+    </footer>
+
+    <script>
+        // Charts replaced with actual figure images
+    </script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ST Methods - AI in Transcriptomics</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Collapsible table styles */
+        .method-row {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .method-row:hover {
+            background-color: #f0f0f0;
+        }
+        .method-row td:first-child {
+            position: relative;
+            padding-left: 30px;
+        }
+        .method-row td:first-child::before {
+            content: '▶';
+            position: absolute;
+            left: 10px;
+            transition: transform 0.3s;
+            font-size: 12px;
+            color: #666;
+        }
+        .method-row.expanded td:first-child::before {
+            transform: rotate(90deg);
+        }
+        .detail-row {
+            display: none;
+            background-color: #f9f9f9;
+        }
+        .detail-row.show {
+            display: table-row;
+        }
+        .detail-content {
+            padding: 20px;
+            border-left: 3px solid #007bff;
+        }
+        .detail-content h4 {
+            margin-top: 0;
+            color: #007bff;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .detail-content p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .detail-content strong {
+            color: #333;
+            display: inline-block;
+            min-width: 150px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .badge-yes {
+            background-color: #28a745;
+            color: white;
+        }
+        .badge-no {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI in Transcriptomics</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Task-specific Methods</a>
+                    <div class="dropdown-content">
+                        <a href="scrna-seq-methods.html">scRNA-seq Methods</a>
+                        <a href="st-methods.html">ST Methods</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Advanced Paradigms</a>
+                    <div class="dropdown-content">
+                        <a href="foundation-models.html">Foundation Models</a>
+                        <a href="ai-agents.html">AI Agents</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="more.html" class="nav-link">More</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">Spatial Transcriptomics (ST) Task-specific Methods</h1>
+<p class="page-description">
+    Spatial transcriptomics has emerged as a powerful technology for profiling gene expression while preserving tissue architecture. 
+    Our review identifies 49 specialized methods designed for spatial transcriptomics analysis, addressing unique challenges such as 
+    spatial clustering, cell segmentation, spatially variable gene identification, and deconvolution of spatial spots. 
+    The following statistics highlight the landscape of spatial transcriptomics methodologies.
+</p>
+
+        <!-- Statistics Section -->
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Distribution by Learning Paradigm</h3>
+            <img src="../assets/images/figureB1.png" alt="Distribution by Learning Paradigm" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+<p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+    <strong>Learning Paradigms:</strong> Among the 49 ST-specific methods reviewed, the field demonstrates a balanced distribution across learning paradigms. Supervised methods dominate cell segmentation tasks (18/49, 37%), while unsupervised and self-supervised approaches collectively account for 55% (27/49), particularly prevalent in spatial clustering (13 methods) and deconvolution (11 methods). Semi-supervised methods (10%, 5/49) primarily target cell type annotation and deconvolution tasks.
+</p>
+
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Installation & Tutorial Availability</h3>
+            <img src="../assets/images/figureB2.png" alt="Installation & Tutorial Availability" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+<p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+    <strong>Reproducibility Support:</strong> ST methods exhibit exceptional reproducibility standards—100% (49/49) provide accessible code repositories. Documentation quality is notably high: 93.9% (46/49) offer installation instructions, 89.8% (44/49) include tutorials, and 89.8% (44/49) provide both, significantly outperforming scRNA-seq methods. Only 3 methods (BLEEP, GAADE, MAFN) lack both installation and tutorial documentation, representing just 6.1% of the field, while an additional 2 methods (FOCUS Framework, Segger) provide only installation instructions without tutorials.
+</p>
+
+        <!-- Table Section -->
+        <div class="table-container" id="table-b">
+            <h2>Table B: Reproducibility Checklist for ST Methods</h2>
+            <p style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>💡 How to use:</strong> Click on any method name to expand and view detailed information including Model, Features, Experimental Profile, Installation, and Tutorials. The default view shows: Method, Application, Supervision, and Code links.
+            </p>
+            <div id="tableContent" style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method (Click to expand)</th>
+                            <th>Application</th>
+                            <th>Supervision</th>
+                            <th>Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>BLEEP</strong></td><td>Denoising and Imputation</td><td>CLIP(ResNet)</td><td>Self-supervised</td><td>Relies solely on histological images for prediction, avoiding the curse of dimensionality and demonstrating robustness to experimental artifacts.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>9,269 spots<br>Metrics:<br>R2:0.217–0.173</td><td><a href="https://github.com/bowang-lab/BLEEP" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>stDCL</strong></td><td>Denoising and Imputation</td><td>GCN(CL)</td><td>Self-supervised</td><td>Facilitates reconstruction of spatial hierarchies while strengthening layer-specific gene expression signals.</td><td>Input:<br>Omics<br>Data scale:<br>1,200–30,000 cells<br>Metrics:<br>PCC:0.502</td><td><a href="https://github.com/Philyzh8/stDCL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>stImpute</strong></td><td>Denoising and Imputation</td><td>AE, GraphASGE, ESM-2</td><td>Self-supervised</td><td>Incorporates functional relevance via ESM-2-based gene networks, enhancing interpretability beyond expression similarity.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>2,000–1.3M cells<br>Metrics:<br>MSE:0.45~0.48<br>CSS:0.66~0.74</td><td><a href="https://github.com/cquzys/stImpute" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaHDmap</strong></td><td>Dimension Reduction</td><td>GCN, U-net, NMF</td><td>Self-supervised</td><td>Generates high-resolution embeddings that reveal fine-grained spatial structures, with multimodal processing capability and strong biological interpretability.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>167,780 cells<br>Metrics:<br>ARI:0.81<br>MAE:0.09</td><td><a href="https://github.com/XiDsLab/SpaHDmap" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STAMP</strong></td><td>Dimension Reduction</td><td>SGCN,Topic modeling</td><td>Unsupervised</td><td>Provides end-to-end interpretable dimension reduction with probabilistic representations, flexibly capturing cellular heterogeneity and scaling well across diverse spatial transcriptomics scenarios.</td><td>Input:<br>Omics<br>Data scale:<br>39,220–93,206 spots<br>Metrics:<br>cLISI:0.96<br>KBET:0.08</td><td><a href="https://github.com/JinmiaoChenLab/scTM" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SPADE</strong></td><td>Identification of SVGs</td><td>VGG-16</td><td>Self-supervised</td><td>Through deep integration of ST data with histological images, SPADE identifies genes that are not only spatially variable but also closely associated with underlying tissue morphology.</td><td>Input:<br>Omics and Imaging<br>Scale:<br>267–3,813 spots<br>Metrics:<br>ARI:0.324<br>Classification accuracy:90.51%</td><td><a href="https://github.com/mexchy1000/spade" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GASTON</strong></td><td>Identification of SVGs</td><td>DNN</td><td>Self-supervised</td><td>By simulating tissue slice topography, it captures both sharp, discontinuous gene expression changes at spatial domain boundaries and smooth expression gradients within domains, enhancing the biological relevance of SVG identification.</td><td>Input:<br>Omics<br>Scale:<br>3,900–9,985 spots<br>Metrics:<br>Spatial coherence score:0.86<br>AUPRC:0.31<br>ARI:0.59<br>F-measure:0.74</td><td><a href="https://github.com/raphael-group/GASTON" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>PROST</strong></td><td>Identification of SVGs</td><td>GAT</td><td>Unsupervised</td><td>Introduces an interpretable quantitative metric (PI) for identifying and ranking SVGs, significantly enhancing spatial domain segmentation performance of PNN and other mainstream models such as STAGATE and SpaceFlow.</td><td>Input:<br>Omics<br>Data scale:<br>19,109 spots<br>Metrics:<br>ARI:0.474<br>NMI:0.610<br>Moran's I:0.384–0.122</td><td><a href="https://github.com/Tang-Lab-super/PROST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GAADE</strong></td><td>Identification of SVGs</td><td>GAT</td><td>Unsupervised</td><td>identified SVGs exhibit clear spatial expression patterns, with flexible parameter settings that allow users to prioritize either spatial localization precision or detection quality based on research needs.</td><td>Input:<br>Omics<br>Data Scale:<br>2,695–4,788 spots<br>Metrics:<br>ARI:0.60<br>Moran's I:0.5428<br>Geary's C:0.5437</td><td><a href="https://github.com/Nefu-Hao/GAADE/tree/main" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>STAIG</strong></td><td>Spatial Clustering</td><td>GNN, BYOL</td><td>Self-supervised</td><td>Utilizes image-guided pre-clustering to reduce false-negative impact, and eliminates batch effects by learning local commonalities without requiring prior spatial alignment.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>2179–19,285 spots<br>Metrics:<br>ARI:0.84<br>NMI:0.78<br>SC:0.40<br>DB:0.87<br>BatchKL:0.14<br>ILISI:2.95</td><td><a href="https://github.com/y-itao/STAIG" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaGCN</strong></td><td>Spatial Clustering</td><td>GCN</td><td>Unsupervised</td><td>As an early and innovative model, it successfully integrates ST data with histological images to jointly perform clustering and SVG identification.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>224–3,353 spots<br>Metrics:<br>ARI:0.522<br>Moran's I:0.54</td><td><a href="https://github.com/jianhuupenn/SpaGCN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GraphST</strong></td><td>Spatial Clustering</td><td>GNN</td><td>Self-supervised</td><td>Enhances spatial clustering and biological relevance by learning local microenvironments via contrastive learning, while integrating multi-sample alignment and deconvolution in one framework.</td><td>Input:<br>Omics<br>Data Scale:<br>72–92,928 spots<br>Metrics:<br>ARI:0.64<br>ILISI:1.846</td><td><a href="https://github.com/JinmiaoChenLab/GraphST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STAGATE</strong></td><td>Spatial Clustering</td><td>GATAE</td><td>Unsupervised</td><td>In low-resolution settings, a cell type–aware module enables pre-clustering to refine tissue boundary detection while simultaneously denoising and learning key spatial expression patterns.</td><td>Input:<br>Omics<br>Data Scale:<br>3,498–50,000 spots<br>Metrics:<br>ARI:0.60<br>NMI:0.65</td><td><a href="https://github.com/zhanglabtools/STAGATE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>ResST</strong></td><td>Spatial Clustering</td><td>Residual graph learning</td><td>Self-supervised</td><td>Quantifies the impact of biological effects on clustering and employs domain adaptation based on Margin Disparity Discrepancy (MDD) theory with strict generalization bounds to achieve more accurate batch correction.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>3,639–3,844 spots<br>Metrics:<br>ARI:0.792<br>SC: 0.161<br>DB:1.676<br>CH:284.062</td><td><a href="https://github.com/StickTaTa/ResST_main" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepST</strong></td><td>Spatial Clustering</td><td>Inception v3, VGAE, DAN</td><td>Unsupervised</td><td>Enhances morphological feature extraction using a pre-trained CNN and applies adversarial learning to effectively correct batch effects.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>3,639–4,000 spots<br>Metrics:<br>ARI:0.798<br>SC: 0.421<br>DB: 1.258</td><td><a href="https://github.com/JiangBioLab/DeepST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SPACEL</strong></td><td>Deconvolution of Spatial Spots</td><td>VAE, GCN, Adversarial learning</td><td>Semi-supervised</td><td>Provides a comprehensive ST data processing suite, including Spoint for deconvolution, Splane for spatial clustering across multiple sections, and Scube for 3D tissue reconstruction.</td><td>Input:<br>Omics<br>Data Scale:<br>3,000–4,000 spots<br>Metrics:<br>PCC:0.73<br>SSIM:0.69<br>RMSE:0.05<br>JSD:0.41<br>AS:0.93</td><td><a href="https://github.com/QuKunLab/SPACEL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STMSGAL</strong></td><td>Spatial Clustering</td><td>GATE</td><td>Self-supervised</td><td>Integrates multi-level encoder features to capture comprehensive data structures, and employs a clustering-guided self-supervised module with pseudo-labels for improved robustness.</td><td>Input:<br>Omics<br>Data scale:<br>2,264–5,913 spots<br>Metrics:<br>ARI:0.606<br>DB: 1.155<br>CH: 1,010.724</td><td><a href="https://github.com/plhhnu/STMSGAL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>MAFN</strong></td><td>Spatial Clustering</td><td>GCN</td><td>Unsupervised</td><td>Enhances feature discriminability via the CCR strategy and adaptively fuses multi-source information through the CAM module, yielding more effective and robust representations for clustering.</td><td>Input:<br>Omics<br>Data Scale:<br>32,285–36,601 genes<br>Metrics:<br>ARI:0.82<br>NMI:0.78</td><td><a href="https://github.com/zhubbbzhu/MAFN/tree/master/MAFN" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>STAGUE</strong></td><td>Spatial Clustering</td><td>GCN</td><td>Unsupervised</td><td>Introduces a spatial learner to construct an additional view, enabling joint optimization of gene expression and spatial structure across three views for both spatial clustering and cell-cell communication analysis.</td><td>Input:<br>Omics<br>Data scale:<br>167–4,788 spots<br>Metrics:<br>ARI: 0.841<br>AMI: 0.820</td><td><a href="https://github.com/deepomicslab/STAGUE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>conST</strong></td><td>Spatial Clustering</td><td>GNN, MAE</td><td>Self-supervised</td><td>Employs a multi-level contrastive learning framework across data modalities and granularities, with GNNExplainer for interpretability, enhancing model credibility in biological applications.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>971–3278 spot<br>Metrics:<br>ARI:0.65<br>SC:0.8<br>CHS:603<br>DBI:1.8</td><td><a href="https://github.com/ys-zong/conST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>stMVC</strong></td><td>Spatial Clustering</td><td>GATE, SimCLR</td><td>Semi-supervised</td><td>Constructs two independent graph views—Histological Similarity Graph (HSG) and Spatial Location Graph (SLG)—and incorporates weak supervision from biological priors (e.g., annotated tumor regions) to guide embedding learning.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>3,460–4,789 spots<br>Metrics:<br>ASW:0.44</td><td><a href="https://github.com/cmzuo11/stMVC" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SiGra</strong></td><td>Spatial Clustering</td><td>Transformer</td><td>Self-supervised</td><td>Effectively integrates image and transcriptomic features through three parallel encoder–decoder branches, achieving clustering results (measured by ARI) closer to pathologist-annotated gold standards than classical methods such as Seurat and BayesSpace.</td><td>Input:<br>Omics and Imaging<br>Scale:<br>3,431–4,221 spots<br>Metrics:<br>ARI:0.62</td><td><a href="https://github.com/QSong-github/SiGra" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaGT</strong></td><td>Spatial Clustering</td><td>Transformer</td><td>Unsupervised</td><td>Introduces structure-reinforced self-attention to iteratively refine graph structures, offering strong generalizability and stable performance on both high- and low-resolution ST data without relying on additional modalities.</td><td>Input:<br>Omics and Imaging<br>Scale:<br>1,848–41,786 spots<br>Metrics:<br>ARI:0.805<br>Moran's I:0.664</td><td><a href="https://github.com/xy428/SpaGT" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>FOCUS Framework</strong></td><td>Cell Type Annotation</td><td>GCN</td><td>Semi-supervised</td><td>introduces a novel approach based on subcellular RNA spatial distribution, achieving high annotation accuracy and strong interpretability by quantifying gene importance and revealing pathways linked to cell identity, while maintaining high performance with limited labeled data.</td><td>Input:<br>Omics<br>Data scale:<br>300,000–766,313 cells<br>Metrics:<br>F1:0.909<br>Accucary:0.948</td><td><a href="https://github.com/OmicsML/focus" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>Spatial-ID</strong></td><td>Cell Type Annotation</td><td>DNN, VGAE</td><td>Supervised</td><td>Demonstrates strong robustness to gene expression sparsity and is effectively applicable to 3D and large-field (centimeter-scale) tissue samples.</td><td>Input:<br>Omics<br>Data scale:<br>31,299–159,738 cells<br>83,621–280,186 cells<br>Metrics:<br>Accuracy:92.75%<br>Weighted F1:0.9209</td><td><a href="https://github.com/TencentAILabHealthcare/spatialID" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SPANN</strong></td><td>Cell Type Annotation</td><td>VAE</td><td>Supervised</td><td>achieves cell-type-level alignment through optimal transport, enables robust discovery of novel cell types with an expert ensemble system, and uniquely integrates spatial information via regularization techniques.</td><td>Input:<br>Omics<br>Data scale:<br>4,382–15,413<br>1,549–3,166<br>Metrics:<br>ACC:0.831<br>NMI:0.772<br>ARI 0.792</td><td><a href="https://github.com/ddb-qiwang/SPANN-torch" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scBOL</strong></td><td>Cell Type Annotation</td><td>GCN</td><td>Semi-supervised</td><td>Effectively addresses cross-dataset cell type identification by employing bipartite prototype alignment, with strong capability in handling batch effects and discovering novel cell types.</td><td>Input:<br>Omics<br>Data scale:<br>45,958–173,968 cells<br>Metrics:<br>Accuracy:95.8%</td><td><a href="https://github.com/aimeeyaoyao/scBOL" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STELLAR</strong></td><td>Cell Type Annotation</td><td>GCN</td><td>Semi-supervised</td><td>The learned cell embeddings are applicable to both cell classification and the identification of higher-order tissue structures, such as immune follicles, that extend beyond individual cellular neighborhoods.</td><td>Input:<br>Omics<br>Data scale:<br>619,186–45,958<br>Metrics:<br>Accuracy:0.93<br>F1:0.82</td><td><a href="https://github.com/snap-stanford/stellar" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpaDecon</strong></td><td>Deconvolution of Spatial Spots</td><td>SAE</td><td>Semi-supervised</td><td>Integrates multimodal data to account for the tendency of spatially adjacent and histologically similar regions to share cell type compositions, while demonstrating high efficiency in speed and memory usage.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>74,973–100,064cells<br>224–3,798 spots<br>Metrics:<br>MSE:0.004<br>JSD:0.28</td><td><a href="https://github.com/kpcoleman/SpaDecon" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SD2</strong></td><td>Deconvolution of Spatial Spots</td><td>GCN, AE</td><td>Semi-supervised</td><td>Treats high dropout rates as informative patterns rather than noise, and uses them to guide feature gene selection, representing a fundamental innovation at the feature selection level.</td><td>Input:<br>Omics<br>Data Scale:<br>1,927–16,119 cells<br>428–3,355 spots<br>Metrics:<br>RMSE:0.06<br>JSD:0.21<br>R:0.57</td><td><a href="https://github.com/leihouyeung/SD2" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STdGCN</strong></td><td>Deconvolution of Spatial Spots</td><td>GCN</td><td>Semi-supervised</td><td>Employs a unique dual-GCN parallel architecture and introduces an optimized pseudo-ST point generation method to address the challenge of rare cell types.</td><td>Input:<br>Omics<br>Data scale:<br>93,450–1.1M cells<br>59–3115 spots<br>Metrics:<br>RMSE:0.05<br>JSD:0.002</td><td><a href="https://github.com/luoyuanlab/stdgcn" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SPADE</strong></td><td>Deconvolution of Spatial Spots</td><td>SpaGCN</td><td>Supervised</td><td>Uses a domain-first strategy, achieving high true positive and low false positive rates in detecting correct cell types within each domain.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>47,209–22,000 cells<br>700–2,000 spots<br>Metrics:<br>mAD:0.007<br>RMSD:0.015<br>R:0.997</td><td><a href="https://github.com/anlingUA/SPADE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CLPLS</strong></td><td>Deconvolution of Spatial Spots</td><td>GCN, Contrastive learning</td><td>Self-supervised</td><td>By integrating multi-omics data, CLPLS resolves spatial cell type distribution and enables exploration of spatially epigenomic heterogeneity across tissues.</td><td>Input:<br>Omics<br>Data scale:<br>4281–15,095 cells<br>490–53,208 spots<br>Metrics:<br>PCC:0.92<br>SSIM:0.91<br>RMSE:0.12<br>JSD:0.35<br>AUC:0.99</td><td><a href="https://github.com/LindsayMo/CLPLS_package" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SpatialcoGCN</strong></td><td>Deconvolution of Spatial Spots</td><td>VAE, GCN</td><td>Self-supervised</td><td>In addition to deconvolution, introduces SpatialcoGCN-Sim to generate simulated ST data with spatial information, closely matching real data in spatial expression correlation.</td><td>Input:<br>Omics<br>Data Scale:<br>1,040–29,519 cells<br>953–2,376 spots<br>Metrics:<br>ARS:0.96<br>PCC:0.88<br>SSIM:0.82<br>COSSIM:0.92<br>RMSE:0.09<br>JSD:0.49</td><td><a href="https://github.com/wwYinYin/SpatialcoGCN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>LETSmix</strong></td><td>Deconvolution of Spatial Spots</td><td>DNN, Adversarial learning</td><td>Supervised</td><td>Incorporates four types of spatial information through the innovative LETS filter and employs Mixup-enhanced domain adaptation to address platform effects and sample imbalance.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>1,733–57,530 cells<br>224–10,000 spots<br>Metrics:<br>AUC:0.94<br>ER:0.78<br>JSD:0.04<br>Moran's I:0.28</td><td><a href="https://github.com/ZhanYangen/LETSmix/" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STdeconvolve</strong></td><td>Deconvolution of Spatial Spots</td><td>Topic modeling</td><td>Unsupervised</td><td>As an unsupervised method, STdeconvolve is not limited by predefined reference cell types and can identify unique cell types or condition-specific cell states with altered gene expression in ST samples.</td><td>Input:<br>Omics<br>Data scale:<br>260–57,397 spots<br>Metrics:<br>RMSE:0.05</td><td><a href="https://github.com/JEFworks-Lab/STdeconvolve" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>STRIDE</strong></td><td>Deconvolution of Spatial Spots</td><td>Topic modeling</td><td>Unsupervised</td><td>Learns biologically meaningful and interpretable cell type features through topic modeling, and aligns sequential tissue sections to reconstruct 3D spatial architecture.</td><td>Input:<br>Omics<br>Data scale:<br>33,043–611,034 cells<br>1,000–11,626 spots<br>Metrics:<br>PCC:0.84<br>RMSE:0.013</td><td><a href="https://github.com/wanglabtongji/STRIDE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SMART</strong></td><td>Deconvolution of Spatial Spots</td><td>Topic modeling</td><td>Semi-supervised</td><td>Allows incorporation of covariates (e.g., disease status, sex, treatment group) into deconvolution to quantify condition-specific changes in cell-type expression profiles, requiring only a simple marker gene list and minimal reference data.</td><td>Input:<br>Omics<br>Data scale:<br>50–2,702 spots<br>Metrics:<br>RMSE:0.0565<br>PCC:0.955</td><td><a href="https://github.com/yyolanda/SMART" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cellpose</strong></td><td>Cell Segmentation</td><td>U-net</td><td>Supervised</td><td>Pre-trained on high-quality datasets to accurately segment diverse cell types; the novel gradient flow algorithm effectively addresses challenges like uneven fluorescence labeling and signal loss in nuclear regions.</td><td>Input:<br>Omics and Imaging<br>Data Scale:<br>100–1,139 images<br>Metrics:<br>AP:0.93(IoU=0.5)</td><td><a href="https://github.com/mouseland/cellpose" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cellpose2.0</strong></td><td>Cell Segmentation</td><td>U-net</td><td>Supervised</td><td>Supports fine-tuning with minimal labeled data to overcome general model limitations on unseen image types; introduces a model zoo and human-in-the-loop framework for model selection and segmentation refinement.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>608–3,188 images<br>Metric:<br>Improved AP:0.32</td><td><a href="https://github.com/mouseland/cellpose" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cellpose3</strong></td><td>Cell Segmentation</td><td>U-net</td><td>Supervised</td><td>Jointly trained on multiple degradation types—denoising, deblurring, and upsampling—enabling high-quality image restoration without requiring users to specify degradation type or source, thus improving inputs for downstream segmentation.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>8,402 images<br>Metrics:<br>Improved AP:0.7</td><td><a href="https://github.com/mouseland/cellpose" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>BIDCell</strong></td><td>Cell Segmentation</td><td>U-net 3+</td><td>Self-supervised</td><td>Implements self-supervised learning to eliminate reliance on ground truth, with biologically-informed loss functions that guide optimization based on cell shape, size, and other morphological features.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>4,000 patches(40x40)<br>Metrics:<br>Pearson cor:0.95</td><td><a href="https://github.com/SydneyBioX/BIDCell" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SCS</strong></td><td>Cell Segmentation</td><td>Transformer</td><td>Supervised</td><td>Designed for high-resolution ST data without requiring extensive manual annotation, it leverages automatically segmented nuclei from stained images as positive samples and incorporates neighboring gene expression profiles and spatial positions for training, aligning more closely with the intrinsic nature of spatial transcriptomics.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>570k–42M spots<br>Metrics:<br>IoU:0.75<br>Pearson cor:0.88</td><td><a href="https://github.com/chenhcs/SCS" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>UCS</strong></td><td>Cell Segmentation</td><td>CNN</td><td>Supervised</td><td>Efficient and user-friendly; the two-step strategy achieves accurate cell boundaries highly consistent with H&E staining while maintaining high transcript coverage.</td><td>Input:<br>Omics and Imaging<br>Scale:<br>107,829–165,752 cells<br>Metrics:<br>F1:0.84</td><td><a href="https://github.com/YangLabHKUST/UCS" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Segger</strong></td><td>Cell Segmentation</td><td>Heterogeneous GCN</td><td>Supervised</td><td>Extends nucleus-based segmentation to capture cytoplasmic signals while minimizing contamination, achieving a sensitivity–accuracy balance.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>180k cells<br>Metrics:<br>PMP:0.26<br>MECR:0.015</td><td><a href="https://github.com/EliHei2/segger_dev" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>JSTA</strong></td><td>Cell Segmentation</td><td>EM algorithm</td><td>Supervised</td><td>Jointly optimizes cell segmentation and cell type annotation through iterative EM algorithm, enabling high-precision localization of cellular subtypes.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>83–142 cell types<br>Metrics:<br>Improved accuracy:45%</td><td><a href="https://github.com/wollmanlab/JSTA" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CelloType</strong></td><td>Cell Segmentation</td><td>Transformer, DINO</td><td>Supervised</td><td>Employs end-to-end multi-task learning to jointly optimize segmentation and classification, enabling accurate identification of both cells and nuclei, as well as segmentation of non-cellular structures with large size variability.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>59–28 images<br>Metrics:<br>AP:0.93(IoU=0.5)</td><td><a href="https://github.com/tanlabcode/CelloType" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>FICTURE</strong></td><td>Cell Segmentation</td><td>LDA</td><td>Unsupervised</td><td>A segmentation-Free method, instead of defining explicit cell boundaries, it infers spatial factors directly at submicron-resolution pixel level, while remaining scalable to ultra-large datasets.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>6.8M–700M transcripts<br>Metrics:<br>Accuracy:0.975</td><td><a href="https://github.com/seqscope/ficture" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GeneSegNet</strong></td><td>Cell Segmentation</td><td>FCN</td><td>Supervised</td><td>Transforms discrete RNA spatial coordinates into continuous 2D probability maps, enabling effective integration with DAPI images; introduces a recursive training strategy with alternating optimization to enhance robustness and performance on noisy-labeled datasets.</td><td>Input:<br>Omics and Imaging<br>Data scale:<br>28–59 images<br>Metrics:<br>Image IoU:0.73<br>Gene IoU:0.64</td><td><a href="https://github.com/BoomStarcuc/GeneSegNet" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        <!-- Additional Info -->
+<div class="table-container">
+    <h2>📊 Analysis Summary</h2>
+    <ul style="list-style-position: inside; line-height: 2;">
+        <li><strong>Total Methods Reviewed:</strong> 49</li>
+        <li><strong>Primary Applications:</strong> Spatial Clustering (13 methods, 27%), Cell Segmentation (11 methods, 22%), Deconvolution of Spatial Spots (11 methods, 22%), Cell Type Annotation (5 methods, 10%), Identification of SVGs (4 methods, 8%), Dimension Reduction (3 methods, 6%), Denoising & Imputation (3 methods, 6%)</li>
+        <li><strong>Supervision Distribution:</strong> Supervised (~37%, 18 methods), Self-supervised (~27%, 13 methods), Unsupervised (~29%, 14 methods), Semi-supervised (~10%, 5 methods)</li>
+        <li><strong>Unsupervised + Self-supervised:</strong> 27/49 (55%)</li>
+<li><strong>Code Availability:</strong> 49/49 (100%) link to public repositories</li>
+<li><strong>Installation Docs:</strong> 46/49 (93.9%)</li>
+<li><strong>Tutorials:</strong> 44/49 (89.8%)</li>
+<li><strong>Both Install + Tutorial:</strong> 44/49 (89.8%)</li>
+        <li><strong>Notable Trends:</strong> Cell segmentation heavily relies on supervised learning (9/11 methods), while spatial clustering predominantly uses unsupervised/self-supervised approaches (11/13 methods). Multi-modal integration (combining imaging + omics) is employed by 19 methods (39%), particularly in segmentation and clustering tasks.</li>
+    </ul>
+</div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AI in Transcriptomics Review</p>
+        <p><a href="more.html">Contact & More Information</a></p>
+    </footer>
+
+    <script>
+        // Collapsible table functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.table-container table tbody');
+            if (!table) return;
+
+            const rows = table.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length !== 9) return;
+
+                // Extract data
+                const method = cells[0].innerHTML;
+                const application = cells[1].textContent;
+                const model = cells[2].innerHTML;
+                const supervision = cells[3].textContent;
+                const features = cells[4].innerHTML;
+                const experimental = cells[5].innerHTML;
+                const code = cells[6].innerHTML;
+                const installation = cells[7].textContent.trim();
+                const tutorials = cells[8].textContent.trim();
+
+                // Create main row (collapsed view)
+                row.className = 'method-row';
+                row.innerHTML = `
+                    <td>${method}</td>
+                    <td>${application}</td>
+                    <td>${supervision}</td>
+                    <td>${code}</td>
+                `;
+
+                // Create detail row (expanded view)
+                const detailRow = document.createElement('tr');
+                detailRow.className = 'detail-row';
+                detailRow.innerHTML = `
+                    <td colspan="4">
+                        <div class="detail-content">
+                            <h4>📋 Detailed Information</h4>
+                            <p><strong>Model/Architecture:</strong> ${model}</p>
+                            <p><strong>Key Features:</strong> ${features}</p>
+                            <p><strong>Experimental Profile:</strong> ${experimental}</p>
+                            <p><strong>Installation:</strong> ${installation ? '<span class="badge badge-yes">Available</span>' : '<span class="badge badge-no">N/A</span>'}</p>
+                            <p><strong>Tutorials:</strong> ${tutorials ? '<span class="badge badge-yes">Available</span>' : '<span class="badge badge-no">N/A</span>'}</p>
+                        </div>
+                    </td>
+                `;
+
+                // Insert detail row after main row
+                row.parentNode.insertBefore(detailRow, row.nextSibling);
+
+                // Add click event
+                row.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                    detailRow.classList.toggle('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>scRNA-seq Methods - AI in Transcriptomics</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Collapsible table styles */
+        .method-row {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .method-row:hover {
+            background-color: #f0f0f0;
+        }
+        .method-row td:first-child {
+            position: relative;
+            padding-left: 30px;
+        }
+        .method-row td:first-child::before {
+            content: '▶';
+            position: absolute;
+            left: 10px;
+            transition: transform 0.3s;
+            font-size: 12px;
+            color: #666;
+        }
+        .method-row.expanded td:first-child::before {
+            transform: rotate(90deg);
+        }
+        .detail-row {
+            display: none;
+            background-color: #f9f9f9;
+        }
+        .detail-row.show {
+            display: table-row;
+        }
+        .detail-content {
+            padding: 20px;
+            border-left: 3px solid #007bff;
+        }
+        .detail-content h4 {
+            margin-top: 0;
+            color: #007bff;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .detail-content p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .detail-content strong {
+            color: #333;
+            display: inline-block;
+            min-width: 150px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        .badge-yes {
+            background-color: #28a745;
+            color: white;
+        }
+        .badge-no {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI in Transcriptomics</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Task-specific Methods</a>
+                    <div class="dropdown-content">
+                        <a href="scrna-seq-methods.html">scRNA-seq Methods</a>
+                        <a href="st-methods.html">ST Methods</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Advanced Paradigms</a>
+                    <div class="dropdown-content">
+                        <a href="foundation-models.html">Foundation Models</a>
+                        <a href="ai-agents.html">AI Agents</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="more.html" class="nav-link">More</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">scRNA-seq Task-specific Methods</h1>
+<p class="page-description">
+    Our review encompasses 84 task-specific methods developed specifically for single-cell RNA sequencing analysis. 
+    These methods span eight key analytical workflows including denoising & imputation, dimension reduction, batch effect correction, 
+    cell clustering, cell annotation, trajectory inference, gene regulatory network (GRN) inference, and cross-species analysis. 
+    The following statistics provide an overview of the methodological landscape and reproducibility standards in the scRNA-seq field.
+</p>
+
+        <!-- Statistics Section -->
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Distribution by Supervision Type</h3>
+            <img src="../assets/images/figureA1.png" alt="Distribution by Supervision Type" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+<p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+    <strong>Learning Paradigms:</strong> Among the 84 scRNA-seq task-specific methods reviewed, unsupervised and self-supervised approaches collectively dominate with 69% (58/84 methods), reflecting the field's emphasis on discovering intrinsic cellular structures without extensive labeled references. Unsupervised methods lead at 55% (46 methods), particularly prevalent in foundational tasks like denoising & imputation (11 methods), dimension reduction (7 methods), and batch effect correction (12 methods). Self-supervised learning accounts for 14% (12 methods), while supervised (16%, 13 methods), semi-supervised (13%, 11 methods), and weakly-supervised (2%, 2 methods) approaches are primarily deployed in annotation tasks requiring reference labels.
+</p>
+
+        <div class="stat-chart" style="margin-bottom: 2rem;">
+            <h3>Installation & Tutorial Availability</h3>
+            <img src="../assets/images/figureA2.png" alt="Installation & Tutorial Availability" style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+<p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+    <strong>Reproducibility Support:</strong> Code accessibility remains strong with 97.6% (82/84) of methods providing public repositories. However, reproducibility support reveals room for improvement: 85.7% (72/84) provide installation instructions, 82.1% (69/84) include tutorials, and 82.1% (69/84) offer both documentation types. Notably, 12 methods lack both installation and tutorial documentation (scVGAE, cnnImpute, scIDPMs, Pathway-Constrained DNNs, sciLaMA, deepMNN, scMEDAL, scSemiCluster, scVQC, scGAD, TripletCell, scMultiomeGRN), representing 14.3% of the field, while an additional 3 methods (DeepBID, scMMT, scRegNet) provide only installation instructions without tutorials. This indicates ongoing challenges in standardizing reproducibility practices, though the majority of methods demonstrate strong commitment to accessibility and usability.
+</p>
+
+        <!-- Table Section -->
+        <div class="table-container" id="table-a">
+            <h2>Table A: Reproducibility Checklist for scRNA-seq Methods</h2>
+            <p style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>💡 How to use:</strong> Click on any method name to expand and view detailed information including Model, Features, Experimental Profile, Installation, and Tutorials. The default view shows: Method, Application, Supervision, and Code links.
+            </p>
+            <div id="tableContent" style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method (Click to expand)</th>
+                            <th>Application</th>
+                            <th>Supervision</th>
+                            <th>Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>scGNN</strong></td><td>Denoising and imputation</td><td>Graph Neural Network with Multi-modal Autoencoders</td><td>Unsupervised</td><td>Explicitly models cell-cell relationships in a graph to inform imputation by aggregating information from neighboring cells.</td><td>Inputs: omics<br>data scale: <br>>10k cells<br>Metrics:<br>ARI:0.67–0.92<br>Pearson's:0.95</td><td><a href="https://github.com/juexinwang/scGNN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scVGAE</strong></td><td>Denoising and imputation</td><td>Variational Graph Autoencoder (VGAE) with ZINB Loss</td><td>Unsupervised</td><td>Integrates Graph Convolutional Networks into a ZINB-based VAE framework to preserve cell-cell similarity during imputation.</td><td>Inputs: omics<br>data scale: <br>1,014–22,770 cells<br>Metrics:<br>ARI:0.184–0.797</td><td><a href="https://github.com/inoue0426/scVGAE-paper" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>DeepImpute</strong></td><td>Denoising and imputation</td><td>Divided Deep Neural Networks</td><td>Unsupervised</td><td>Fast and scalable "divide-and-conquer" strategy that learns gene-gene relationships to predict missing values.</td><td>Inputs: omics<br>data scale:<br>100–50k cells<br>Metrics: <br>Pearson: 0.880–0.884</td><td><a href="https://github.com/lanagarmire/deepimpute" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DCA</strong></td><td>Denoising and imputation</td><td>Autoencoder with ZINB Loss</td><td>Unsupervised</td><td>Specifically models scRNA-seq count distribution, overdispersion, and dropout rates simultaneously; highly scalable.</td><td>Inputs: omics<br>data scale: <br>2,000 cells<br>Metrics: <br>Pearson's：0.8<br>Spearman：0.51</td><td><a href="https://github.com/theislab/dca" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>AutoClass</strong></td><td>Denoising and imputation</td><td>Autoencoder with an integrated Classifier</td><td>Self-supervised</td><td>Distribution-agnostic model that can effectively clean a wide range of noise types beyond dropouts without strong statistical assumptions.</td><td>Inputs: omics<br>data scale: <br>182–7,162 cells<br>Metrics:<br>MSE:0.5–0.6<br>ARI:0.37–0.86<br>NMI：0.39–0.82</td><td><a href="https://github.com/datapplab/AutoClass" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scDHA</strong></td><td>Denoising and imputation/Cell clustering</td><td>Hierarchical Autoencoder</td><td>Unsupervised</td><td>Provides a fast, precise, and complete analysis pipeline for robust feature extraction, denoising, and downstream analysis.</td><td>Inputs: omics<br>data scale:<br>90–61,000 cells<br>Metrics: <br>R² = 0.93<br>ARI = 0.81<br>NMI：0.39–0.82</td><td><a href="https://github.com/duct317/scDHA" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SERM</strong></td><td>Denoising and imputation</td><td>Neural Network with Data Self-Consistency</td><td>Unsupervised</td><td>Recovers high-fidelity expression values by learning from partial data and enforcing self-consistency, offering high computational efficiency.</td><td>Inputs: omics<br>data scale: <br>2,000–599,926 cells<br>Metrics: <br>Pearson >0.9<br>Accuracy>0.8<br>NMI>0.75</td><td><a href="https://github.com/xinglab-ai/self-consistent-expression-recovery-machine" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scNET</strong></td><td>Denoising and imputation</td><td>Dual-view Graph Neural Network</td><td>Unsupervised</td><td>Integrates external biological knowledge (Protein-Protein Interaction networks) to learn context-specific gene and cell embeddings for improved imputation.</td><td>Inputs: omics<br>data scale: <br>799–65,960 cells<br>Metrics:<br>AUPR:0.65–0.97<br>ARI:0.8–0.97</td><td><a href="https://github.com/madilabcode/scNET" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>cnnImpute</strong></td><td>Denoising and imputation</td><td>1D Convolutional Neural Network (CNN)</td><td>Unsupervised</td><td>Uses a CNN to first predict dropout probability and then restore expression values, effectively capturing local gene patterns.</td><td>Inputs: omics<br>data scale: <br>320–4,700 cells<br>Metrics: <br>AUPR:0.65–0.97<br>ARI:0.8–0.97</td><td></td><td></td><td></td></tr>
+                        <tr><td><strong>scAMF</strong></td><td>Denoising and imputation</td><td>Manifold Fitting Module</td><td>Unsupervised</td><td>Denoises data by unfolding its distribution in the ambient space, causing cells of the same type to aggregate more tightly.</td><td>Inputs: omics<br>data scale: 10<sup>3</sup>–10<sup>5</sup>  cells<br>Metrics: ARI：0.78<br>Accuracy：57%→ 100%</td><td><a href="https://github.com/zhigang-yao/scAMF" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DGAN</strong></td><td>Denoising and imputation</td><td>Deep Generative Autoencoder Network</td><td>Unsupervised</td><td>A variational autoencoder variant that robustly imputes data dropouts while simultaneously identifying and excluding outlier cells.</td><td>Inputs: omics<br>data scale: <br>1,000–5,000 cells<br>Metrics:<br>ARI = 0.92<br>FMI = 0.89<br>Accuracy = 0.96</td><td><a href="https://github.com/dikshap11/DGAN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>ZILLNB</strong></td><td>Denoising and imputation/Batch effect correction/Cell clustering</td><td>ZINB Regression with a Deep Generative Model</td><td>Unsupervised</td><td>Combines a ZINB likelihood with a deep generative model to explicitly handle zero inflation and overdispersion, producing denoised/imputed expression and a biologically meaningful latent space that supports high-quality cell clustering, while incorporating batch covariates to correct technical variation.</td><td>Inputs: omics<br>data scale: 10<sup>4</sup>  cells<br>Metrics: <br>ARI ≈ 0.85–0.90<br>Accuracy ~0.9</td><td><a href="https://github.com/tianyingw/ZILLNB" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>UniVI</strong></td><td>Denoising and imputation</td><td>Mixture-of-experts β-VAE</td><td>Unsupervised</td><td>Denoises and imputes data across different modalities (e.g., scRNA-seq, scATAC-seq) via manifold alignment.</td><td>Inputs: omics<br>data scale: <br>10<sup>4</sup>–10<sup>5</sup>cells<br>Metrics: <br>ARI > 0.9<br>R² ：0.85–0.9</td><td><a href="https://github.com/Ashford-A/UniVI" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SCDD</strong></td><td>Denoising and imputation</td><td>Cell-similarity diffusion + GCN-Autoencoder denoising</td><td>Unsupervised</td><td>A two-stage approach that first uses cell similarity for initial imputation and then a GCN-autoencoder to denoise the result and mitigate over-smoothing.</td><td>Inputs: omics<br>data scale:<br>10<sup>2</sup>–10<sup>6</sup>cells<br>Metrics: <br>ARI：0.5–0.975<br>R²：0.999 <br>MSE：0.061</td><td><a href="https://github.com/lyotvincent/SCDD" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scIDPMs</strong></td><td>Denoising and imputation</td><td>Conditional Diffusion Probabilistic Model</td><td>Unsupervised</td><td>Performs targeted imputation by first identifying likely dropout sites and then inferring values, which helps avoid altering true biological zeros.</td><td>Inputs: omics<br>data scale: <br>10<sup>4</sup>cells<br>Metrics: <br>ARI：0.98<br>NMI：0.98 <br>F–score：0.99</td><td><a href="https://github.com/zhangzq2406/scIDPMs" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scVI</strong></td><td>Dimension reduction/Batch effect correction/Cross-Species Analysis/Cell clustering</td><td>VAE with ZINB loss function</td><td>Unsupervised</td><td>Learns a robust probabilistic latent space that disentangles biological variation from technical noise and batch effects, models batch identity as a covariate to yield a harmonized representation, extends to cross-species analysis by treating species as a batch effect, and enables high-quality indirect cell clustering through denoised, integrated latent embeddings.</td><td>Inputs: omics<br>data scale: 3,000–1.3M cells<br>Unsupervised<br>Metrics: ASW ≈ 0.47<br>ARI ≈ 0.81<br>NMI ≈ 0.72<br>BE ≈ 0.6</td><td><a href="https://github.com/scverse/scvi-tools" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGAE</strong></td><td>Dimension reduction</td><td>Graph Autoencoder (GAE)</td><td>Unsupervised</td><td>Explicitly preserves the topological structure of the cell-cell similarity graph, improving trajectory inference and cluster separation.</td><td>Inputs: omics<br>data scale: <br>10,000 cells<br>Metrics:<br>NMI:0.61–0.65</td><td><a href="https://github.com/ZixiangLuo1161/scGAE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>totalVI</strong></td><td>Dimension reduction/Batch effect correction/Cell clustering</td><td>VAE for Multi-modal Data</td><td>Unsupervised</td><td>Jointly models RNA and surface proteins to create a unified latent space for multi-omic analysis, simultaneously corrects batch effects in both modalities, and enables high-quality indirect cell clustering by providing robust, denoised, integrated embeddings.</td><td>Inputs: omics <br>CITE–seq<br>data scale: <br>32,648 cells<br>Metrics:<br>MAE ≈ 0.8<br>AUC ≈  0.99<br>Latent Mixing Metric: –0.025</td><td><a href="https://github.com/scverse/scvi-tools" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SAUCIE</strong></td><td>Dimension reduction/Cell clustering</td><td>Deep Sparse Autoencoder</td><td>Unsupervised</td><td>Performs multiple tasks simultaneously (dimensionality reduction, clustering, imputation, batch correction) within a single, unified framework.</td><td>Inputs: omics <br>data scale: <br>11 million cells<br>Metrics:<br>Modularity：0.8531<br>AUC≈0.9342</td><td><a href="https://github.com/KrishnaswamyLab/SAUCIE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SIMBA</strong></td><td>Dimension reduction</td><td>Multi-entity Graph Embedding</td><td>Unsupervised</td><td>Co-embeds cells and their defining features (e.g., genes) into a shared latent space, enabling a unified framework for diverse tasks like marker discovery and integration.</td><td>Inputs: omics <br>data scale: <br>million cells<br>Metrics:<br>ARI :0.6 –0.9</td><td><a href="https://github.com/huidongchen/simba" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GLUE</strong></td><td>Dimension reduction</td><td>Graph-linked VAEs with Adversarial Alignment</td><td>supervised</td><td>Accurately integrates unpaired multi-omics data by explicitly modeling regulatory interactions with a guidance graph, ensuring scalability and robustness.</td><td>Inputs: omics <br>data scale: <br>> 17,000 cells<br>Metrics:<br>ARI :0.716<br>FI Score：0.802<br>AMI ≈ 0.778</td><td><a href="https://github.com/gao-lab/GLUE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Pathway-Constrained DNNs</strong></td><td>Dimension reduction</td><td>Deep Neural Network with Biologically-informed Architecture</td><td>Unsupervised</td><td>Enhances biological interpretability and reduces model complexity by designing network layers to correspond to known biological pathways.</td><td>Inputs: omics <br>data scale: <br>Millions of cells<br>Metrics:<br>ASW: 0.6–0.7<br>R² = 0.236</td><td><a href="https://github.com/babelomics/signalization_prior_knowledge_based_nn" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>CellBox</strong></td><td>Dimension reduction</td><td>ODE-based Dynamic Systems Model</td><td>Supervised</td><td>Predicts cellular responses to unseen perturbations by learning a de novo, interpretable network of molecular interactions directly from data, without relying on prior pathway knowledge.</td><td>Inputs: omics <br>data scale: <br>100 proteins<br>Metrics:<br>Pearson's Correlation：0.93</td><td><a href="https://github.com/sanderlab/CellBox" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>sciLaMA</strong></td><td>Dimension reduction</td><td>Paired-VAE with LLM Gene Embeddings</td><td>Unsupervised</td><td>Integrates static gene embeddings from LLMs to generate context-aware representations for both cells and genes, improving performance while maintaining computational efficiency.</td><td>Inputs: omics <br>data scale: <br>14k cells<br>Metrics:<br>NMI:0.745<br>ASW :0.535<br>BatchASW:0.865</td><td><a href="https://github.com/microsoft/sciLaMA" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>Vaeda</strong></td><td>Doublet removal</td><td>Cluster-aware VAE with Positive-Unlabeled (PU) Learning</td><td>Supervised</td><td>Provides a more nuanced separation of singlets and doublets by considering cell cluster information during representation learning.</td><td>Inputs: omics <br>data scale: <br>12k cells<br>Metrics:<br>AUPRC :0.558<br>F1–score:0.496<br>Precision :0.59</td><td><a href="https://github.com/kostkalab/vaeda" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Solo</strong></td><td>Doublet removal</td><td>Semi-supervised VAE</td><td>Supervised</td><td>Achieves high accuracy by learning the manifold of genuine single-cell profiles and then training a classifier to identify deviations (doublets).</td><td>Inputs: omics <br>data scale: <br>44k cells<br>Metrics:<br>AP :0.489<br>AUROC :0.856</td><td><a href="https://github.com/calico/solo" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>deepMNN</strong></td><td>Batch effect correction</td><td>Deep Learning with MNN and Residual Networks</td><td>Self-supervised</td><td>Integrates the logic of Mutual Nearest Neighbors (MNN) into a deep learning framework for one-step, multi-batch correction.</td><td>Inputs: omics<br>data scale: 10<sup>3</sup>–10<sup>5</sup> cells<br>Metrics: ASW F1 Score: ~0.565<br>ARI: ~ 0.8</td><td><a href="https://github.com/zoubin-ai/deepMNN" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>STACAS</strong></td><td>Batch effect correction</td><td>MNN-based Method</td><td>Semi-supervised</td><td>Leverages prior knowledge (cell type labels) to filter inconsistent anchors, improving the balance between batch correction and signal preservation.</td><td>Inputs: omics<br>data scale: 10<sup>3</sup>–10<sup>5</sup> cells<br>semi–supervised<br>Metrics: Clisi > 0.6<br>Cell type ASW > 0.4</td><td><a href="https://github.com/carmonalab/STACAS" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGen</strong></td><td>Batch effect correction/Cross-Species Analysis</td><td>VAE with Latent Space Arithmetic</td><td>Supervised</td><td>Models and removes batch effects by performing vector arithmetic on the latent representations of cells.Predicts cellular perturbation responses across species, demonstrating that latent space can bridge species differences.</td><td>Inputs: omics <br>data scale: <br>105,476 cells<br>Metrics:<br>R2:0.85–0.95<br>ASW > 0.6</td><td><a href="https://github.com/theislab/scgen" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scANVI</strong></td><td>Batch effect correction/Cell clustering</td><td>Semi-supervised VAE</td><td>Supervised</td><td>Uses partial cell-type labels in a semi-supervised VAE to more accurately align shared populations across batches, enabling high-quality indirect clustering by first learning robust, denoised, and integrated latent representations.</td><td>Inputs: omics <br>data scale: <br>10k cells<br>Metrics:<br>Weighted Accuracy:<br>>0.8</td><td><a href="https://github.com/scverse/scvi-tools" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scMEDAL</strong></td><td>Batch effect correction</td><td>Dual-Autoencoder System</td><td>Unsupervised</td><td>Separately models batch-invariant (fixed) and batch-specific (random) effects, enhancing interpretability and enabling retrospective analysis.</td><td>Inputs: omics<br>data scale: <br>10<sup>4</sup>–10<sup>5</sup>cells<br>Metrics: <br>ASW = +0.69</td><td></td><td></td><td></td></tr>
+                        <tr><td><strong>ABC</strong></td><td>Batch effect correction</td><td>Semi-supervised Adversarial Autoencoder</td><td>Semi-supervised</td><td>Guided by a cell type classifier to ensure the retention of biological signals during adversarial batch correction.</td><td>Inputs: omics<br>data scale: 10<sup>4</sup>–10<sup>5</sup>cells<br>Metrics:<br>NMI ~ 0.91<br>Ilisi ~ 0.3</td><td><a href="https://github.com/reutd/ABC" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CarDEC</strong></td><td>Batch effect removal/Cell clustering</td><td>Generative Models with Integrated Clustering</td><td>Self-supervised</td><td>Performs clustering and batch effect removal jointly by optimizing a unified objective, producing batch-invariant embeddings and clear cluster assignments within a generative/multi-task framework that delineates cell subpopulations.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>5</sup>cells<br>Metrics: <br>ARI：0.78–0.98<br>CV ~ 0</td><td><a href="https://github.com/jlakkis/CarDEC" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DESC</strong></td><td>Batch effect correction/Cell clustering</td><td>Deep Embedding and Clustering Models</td><td>Unsupervised</td><td>Performs batch effect correction and clustering jointly by optimizing a unified objective, co-optimizing representation learning and cluster assignment end-to-end to produce batch-invariant embeddings and more coherent cell groups.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>6</sup>cells<br>Metrics: <br>ARI = 0.919–0.970<br>Accuracy：96.5%<br>KL divergence:0.6</td><td><a href="https://github.com/eleozzr/desc" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scArches</strong></td><td>Batch effect correction/Cell clustering/Cross-species analysis</td><td>Transfer Learning Framework</td><td>Supervised</td><td>Transfer-learning maps queries to a fixed reference without retraining, providing batch-corrected embeddings, atlas-level clustering/label transfer, and scalable cross-species mapping.</td><td>Inputs: omics<br>data scale: <br>Million cells<br>Metrics: <br>Batch ASW：0.5–0.7<br>ARI:0.8–0.9</td><td><a href="https://github.com/theislab/scarches" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>AIF</strong></td><td>Batch effect correction</td><td>Adversarial Information Factorization</td><td>Unsupervised</td><td>Factorizes batch information from the biological signal using adversarial networks, without needing prior cell type knowledge.</td><td>Inputs: omics<br>data scale: <br>30K cells<br>Metrics: <br>ASW：0.56–0.87<br>ARI:0.89–0.91</td><td><a href="https://gitlab-research.centralesupelec.fr/mics_biomathematics/biomaths/batchaif" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepBID</strong></td><td>Batch effect correction</td><td>NB-based Autoencoder with dual-KL loss</td><td>Unsupervised</td><td>Concurrently corrects batch effects and performs clustering through an iterative process guided by a dual-KL divergence loss.</td><td>Inputs: omics<br>data scale: 10<sup>3</sup>–10<sup>6</sup>cells<br>Metrics:<br>ARI = 0.65–0.97<br>NMI = 0.72–0.98</td><td><a href="https://github.com/shaoqiangzhang/DeepBID" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>ResPAN</strong></td><td>Batch effect correction</td><td>Wasserstein GAN with Residual Networks</td><td>Unsupervised</td><td>A powerful batch correction model that combines a WGAN with mutual nearest neighbor pairing for robust integration.</td><td>Inputs: omics<br>data scale: 10<sup>3</sup>–10<sup>6</sup>cells<br>Metrics: <br>ARI =0.92681<br>NMI = 0.90775<br>cLISI：0.97093</td><td><a href="https://github.com/AprilYuge/ResPAN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scDML</strong></td><td>Batch effect correction</td><td>Deep Metric Learning</td><td>Self-supervised</td><td>Learns a batch-agnostic embedding space where distances between similar cells are minimized, regardless of batch origin.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>6</sup>cells<br>Metrics:<br>ARI = 0.966<br>NMI = 0.934</td><td><a href="https://github.com/eleozzr/scDML" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>BERMAD</strong></td><td>Batch effect correction</td><td>Multi-layer, Dual-channel Autoencoder</td><td>Self-supervised</td><td>Designed to preserve dataset-specific heterogeneity before alignment, mitigating the risk of over-correction.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>5</sup>cells<br>Metrics: <br>ARI = 0.94 ± 0.00</td><td><a href="https://github.com/zhanglabNKU/BERMAD" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Portal</strong></td><td>Batch effect correction</td><td>Adversarial Domain Translation Network</td><td>Unsupervised</td><td>Fast and scalable integration that avoids over-correction by adaptively distinguishing between shared and batch-unique cell types.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup>–10<sup>6</sup>cells<br>Metrics: <br>iLISI ~ 1</td><td><a href="https://github.com/YangLabHKUST/Portal" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scVAE</strong></td><td>Cell clustering</td><td>Generative Models with Integrated Clustering</td><td>Unsupervised</td><td>Possess integrated capabilities to delineate cell subpopulations as part of their generative or multi-task framework.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>6</sup>cells<br>Metrics: <br>ARI = 0.656 ± 0.039</td><td><a href="https://github.com/scvae/scvae" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scDeepCluster</strong></td><td>Cell clustering</td><td>Integrated Deep Clustering (AE + KL loss)</td><td>Unsupervised</td><td>Co-optimizes representation learning and cluster assignment in an end-to-end fashion for more coherent cell groups.</td><td>Inputs: omics<br>data scale:<br>4,271 cells<br>Metrics: <br>ACC= 0.8100 <br>NMI= 0.7736<br>ARI= 0.7841</td><td><a href="https://github.com/ttgump/scDeepCluster_pytorch" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Cell BLAST</strong></td><td>Cell annotation</td><td>Generative Model / Adversarial Autoencoder</td><td>Unsupervised</td><td>Provides a BLAST-like querying system for scRNA-seq data, using a learned, batch-corrected embedding to annotate cells and identify novel types.</td><td>Inputs: omics<br>data scale:<br>Million cells<br>Metrics: <br>MBA:0.873</td><td><a href="https://github.com/gao-lab/Cell_BLAST" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scSemiCluster</strong></td><td>Cell annotation</td><td>Deep Clustering with Structural Regularization</td><td>Semi-supervised</td><td>Applies a semi-supervised deep clustering algorithm for annotation, regularized by data structure.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup> cells<br>Metrics: Accuracy： >97%。<br>ARI：≈ 0.95</td><td><a href="https://github.com/xuebaliang/scSemiCluster" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scBalance</strong></td><td>Cell annotation</td><td>Sparse Neural Network with Adaptive Sampling</td><td>Supervised</td><td>Specialized tool that uses adaptive sampling techniques to enhance the identification of rare cell types.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup> cells<br>Metrics: <br>Cohen's κ：0.95</td><td><a href="https://github.com/yuqcheng/scBalance" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scTab</strong></td><td>Cell annotation</td><td>Feature-attention Model for Tabular Data</td><td>Supervised</td><td>A scalable model trained on over 22 million cells, achieving robust cross-tissue annotation by focusing on relevant features.</td><td>Inputs: omics<br>data scale: <br>15 million cells<br>Metrics: <br>Macro F1 = 0.7841 ± 0.0030</td><td><a href="https://github.com/theislab/scTab/tree/devel" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scVQC</strong></td><td>Cell annotation</td><td>Split-vector Quantization</td><td>Supervised</td><td>The first method to apply split-vector quantization to create discrete cellular representations that enhance cell type distinction.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup> cells<br>Metrics: <br>Accuracy ： 0.86–0.95<br>ARI:0.82–0.88</td><td><a href="https://github.com/yusri-dh/scVQC" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scNym</strong></td><td>Cell annotation</td><td>Semi-supervised Adversarial Neural Network</td><td>Semi-supervised</td><td>Robustly transfers annotations across experiments by learning from both labeled reference and unlabeled query data.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup> cells<br>Metrics: <br>Accuracy ： 90–92%</td><td><a href="https://github.com/calico/scnym" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CAMLU</strong></td><td>Cell annotation</td><td>Hybrid Autoencoder + SVM</td><td>Semi-supervised</td><td>A hybrid framework that combines an autoencoder with a support vector machine, capable of identifying novel cell types.</td><td>Inputs: omics<br>data scale: <br>2,400–3,800 cells<br>Metrics: <br>Accuracy ≈ 0.95<br>ARI ≈ 0.9</td><td><a href="https://github.com/ziyili20/CAMLU" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>TripletCell</strong></td><td>Cell annotation</td><td>Deep Metric Learning (Triplet Loss)</td><td>Supervised</td><td>Learns a discriminative embedding space, enabling accurate annotation even across different samples or protocols.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup> cells<br>Metrics: <br>Accuracy ≈ 80%</td><td><a href="https://github.com/liuyan3056/TripletCell" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scDeepSort</strong></td><td>Cell annotation</td><td>Pre-trained Weighted Graph Neural Network (GNN)</td><td>Supervised</td><td>An early example of a pre-trained, weighted GNN designed for scalable and accurate cell type annotation.</td><td>Inputs: omics<br>data scale: <br>265,489 cells<br>Metrics: <br>Accuracy：83.79%<br>F1–score (95% CI)：0.47–0.68</td><td><a href="https://github.com/ZJUFanLab/scDeepSort" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>mtANN</strong></td><td>Cell annotation</td><td>Ensemble of Models</td><td>Supervised</td><td>Improves annotation accuracy by integrating multiple reference datasets and can identify previously unseen cell types.</td><td>Inputs: omics<br>data scale:<br> 10<sup>5</sup> cells<br>Metrics: <br>Pearson > 0.9<br>AUPRC ≈ 0.6</td><td><a href="https://github.com/Zhangxf-ccnu/mtANN" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGAD</strong></td><td>Cell annotation</td><td>Anchor-based Self-supervised Framework</td><td>Semi-supervised & self-supervised</td><td>Solves the generalized annotation task by simultaneously annotating seen cell types from a reference and discovering/clustering novel cell types in the query data.</td><td>Inputs: omics<br>data scale:<br> 10<sup>5</sup> cells<br>Metrics: <br>Accuracy >90%</td><td><a href="https://github.com/aimeeyaoyao/scGAD" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>Cellassign</strong></td><td>Cell annotation</td><td>Probabilistic Model with Marker Genes</td><td>Weakly supervised</td><td>Assigns cell types based on a predefined matrix of marker genes, making it highly effective and interpretable in specific contexts.</td><td>Inputs: omics<br>data scale: <br>1,000–20,000 cells<br>Metrics: <br>Accuracy = 0.944<br>F1–score = 0.943</td><td><a href="https://github.com/crazyhottommy/scRNAseq-analysis-notes" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Celler</strong></td><td>Cell annotation</td><td>Genomic Language Model</td><td>Supervised</td><td>Specifically designed with mechanisms to address the long-tail distribution problem for improved annotation of rare cells.</td><td>Inputs: omics<br>data scale: <br>10<sup>7</sup> cells<br>Metrics: <br>F1 = 0.956<br>Precision = 0.841 ± 0.002</td><td><a href="https://github.com/AI4science-ym/HiCeller" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scMMT</strong></td><td>Cell annotation</td><td>Multi-use CNN Framework</td><td>Supervised</td><td>A flexible multi-task framework that performs cell annotation alongside other tasks like protein prediction.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup>cells<br>Metrics: <br>Accuracy ≈ 0.85<br>ARI = 0.945</td><td><a href="https://github.com/SongqiZhou/scMMT" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>TOSICA</strong></td><td>Cell annotation</td><td>Transformer</td><td>Supervised</td><td>Performs interpretable annotation guided by biological entities such as pathways and regulons.</td><td>Inputs: omics<br>data scale: <br>647366 cells<br>Metrics:<br>Accuracy =0.8669</td><td><a href="https://github.com/JackieHanLab/TOSICA" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>RegFormer</strong></td><td>Cell annotation</td><td>Mamba-based Architecture with GRN Hierarchies</td><td>Self-supervised</td><td>A FM that integrates gene regulatory network hierarchies to enhance interpretability and performance.</td><td>Inputs: omics<br>data scale: 10<sup>6</sup> cells<br>Metrics:<br>Accuracy = 0.86<br>Macro–F1 = 0.77</td><td><a href="https://github.com/BGIResearch/RegFormer" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GPTCelltype</strong></td><td>Cell annotation</td><td>Large Language Model (GPT-4)</td><td>Self-supervised</td><td>Demonstrates that large models can accurately infer cell types simply by interpreting lists of marker genes, automating the process.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup> cells<br>Metrics: <br>accuracy ：0.75–0.93</td><td><a href="https://github.com/Winnie09/GPTCelltype" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepVelo</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>Deep Learning Framework</td><td>Self-supervised</td><td>Extends RNA velocity analysis to complex, multi-lineage systems where traditional methods often fail.</td><td>Inputs: omics<br>data scale: <br>10<sup>4</sup> cells<br>Metrics: <br>Consistency Score :0.9</td><td><a href="https://github.com/bowang-lab/DeepVelo" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>VeloVI</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>Deep Generative Model (VAE)</td><td>Unsupervised</td><td>Provides crucial transcriptome-wide uncertainty quantification for the inferred cellular dynamics, enhancing reliability.</td><td>Inputs: omics<br>data scale:<br>10<sup>3</sup>–10<sup>4</sup> cells<br>Metrics: <br>accuracy: 66–68%</td><td><a href="https://github.com/YosefLab/velovi" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scTour</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>VAE with Neural ODE</td><td>Unsupervised</td><td>Learns the vector field of cellular transitions and provides interpretability mechanisms to reveal driver genes.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>5</sup> cells<br>Metrics:<br> Spearman ρ > 0.9</td><td><a href="https://github.com/LiQian-XC/sctour" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>VITAE</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>VAE with a Latent Hierarchical Mixture Model</td><td>Unsupervised</td><td>Enables joint trajectory inference from multiple datasets and provides robust uncertainty quantification.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>6</sup> cells<br>Metrics: <br>ARI :0.5~0.9<br>PDT:0.4~0.9</td><td><a href="https://github.com/jaydu1/VITAE" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>TrajectoryNet</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>Dynamic Optimal Transport Network</td><td>Unsupervised</td><td>Employs a dynamic optimal transport network to learn the continuous flow of cells over time.</td><td>inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>5</sup> cells<br>Metrics:<br>Base TrajectoryNet：≈ 0.897<br>Arch MSE = 0.300<br>Cycle MSE = 0.190</td><td><a href="https://github.com/KrishnaswamyLab/TrajectoryNet" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>TIGON</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>Optimal Transport with Growth/Death Models</td><td>Unsupervised</td><td>Reconstructs both population dynamics and state transition trajectories simultaneously by incorporating cell growth and death.</td><td>Inputs: omics<br>data scale: <br>5,000+ cells<br>Metrics: <br>Pearson = 0.62<br>AUROC ≈ 0.9</td><td><a href="https://github.com/yutongo/TIGON" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GeneTrajectory</strong></td><td>Trajectory Inference and Pseudotime Analysis</td><td>Optimal Transport on a Cell-Cell Graph</td><td>Unsupervised</td><td>A novel gene-centric paradigm that infers trajectories of genes, allowing it to deconvolve concurrent biological programs.</td><td>Inputs: omics<br>data scale: <br>1,000–10,500 cells<br>Metrics: <br>Robustness ≈ 1<br>Spearman ≈ 0.9</td><td><a href="https://github.com/KlugerLab/GeneTrajectory" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>DeepSEM</strong></td><td>GRN inference</td><td>Deep Generative Model for SEMs</td><td>Unsupervised</td><td>A pioneering work that generalized linear structural equation models (SEMs) for GRN inference using a deep generative model.</td><td>Inputs: omics<br>data scale: <br>1,000–10,500 cells<br>Metrics: ARI ≈ 0.82<br>NMI ≈ 0.86</td><td><a href="https://github.com/HantaoShu/DeepSEM" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CellOracle</strong></td><td>GRN inference</td><td>GRN Inference with In Silico Perturbation</td><td>Unsupervised</td><td>Integrates scRNA/ATAC-seq and performs in silico perturbation simulations to predict the functional consequences of TF activity.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>5</sup> cells<br>Metrics:<br>AUROC = 0.66–0.85</td><td><a href="https://github.com/morris-lab/CellOracle" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>LINGER</strong></td><td>GRN inference</td><td>GRN Inference with Regularization</td><td>Unsupervised</td><td>Enhances inference by incorporating atlas-scale external bulk genomics data and TF motif knowledge as regularization.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>4</sup> cells<br>Metrics: <br>AUC = 0.76<br>AUPR = 2.60</td><td><a href="https://github.com/Durenlab/LINGER" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scMultiomeGRN</strong></td><td>GRN inference</td><td>Cross-modal Attention Model</td><td>Semi-supervised</td><td>Specifically designed for multi-omics integration using modality-specific aggregators and cross-modal attention.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup>–10<sup>5</sup> cells<br>Metrics:<br>Accuracy: >0.83<br>AUROC ≈ 0.924<br>AUPR ≈ 0.79</td><td><a href="https://zenodo.org/records/14848389" target="_blank">Link</a></td><td></td><td></td></tr>
+                        <tr><td><strong>scMTNI</strong></td><td>GRN inference</td><td>Multi-task Learning</td><td>Unsupervised</td><td>Infers cell-type-specific GRNs along developmental lineages from multi-omic data.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup> cells<br>Metrics:<br>Accuracy: >0.83<br>F–score >0.3 <br>AUPR : 0.21~0.27</td><td><a href="https://github.com/Roy-lab/scMTNI" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GRN-VAE</strong></td><td>GRN inference</td><td>VAE-based GRN Model</td><td>Unsupervised</td><td>Improves upon the stability and efficiency of earlier generative models like DeepSEM for GRN inference.</td><td>Inputs: omics<br>data scale: <br>10<sup>5</sup> cells<br>Metrics:<br>AUPRC > 1</td><td><a href="https://bcb.cs.tufts.edu/DAZZLE/" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GRANGER</strong></td><td>GRN inference</td><td>Recurrent VAE</td><td>Unsupervised</td><td>Infers causal relationships from time-series scRNA-seq data to capture the dynamic nature of GRNs.</td><td>Inputs: omics<br>data scale: <br>10<sup>3</sup> cells<br>Metrics: <br>AUROC ≈ 0.85–0.90<br>AUPRC ≈ 0.90–0.98</td><td><a href="https://github.com/shaoqiangzhang/GRANGER" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGeneRAI</strong></td><td>GRN inference</td><td>Explainable AI (XAI) Model</td><td>Unsupervised/self-supervised</td><td>Employs XAI techniques to infer interpretable, cell-specific regulatory networks, addressing the "black box" problem.</td><td>Inputs: omics<br>data scale: <br>15,000 cells<br>Metrics: <br>AUC = 0.75–0.88</td><td><a href="https://github.com/PhGK/scGeneRAI" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scGREAT / InfoSEM</strong></td><td>GRN inference</td><td>LLM-integrated Models</td><td>Supervised</td><td>Incorporate textual gene embeddings from large language models as an informative prior to improve GRN inference.</td><td>Inputs: omics<br>data scale: <br>thousands of cells<br>Metrics: <br>AUROC = 0.913 <br>AUPRC = 0.5597</td><td><a href="https://github.com/WangyuchenCS/scGREAT/tree/v1.0.0" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>scRegNet</strong></td><td>GRN inference</td><td>FM+ GNN</td><td>Supervised</td><td>Combines the power of single-cell FMs with GNNs to predict regulatory connections.</td><td>Inputs: omics<br>data scale: <br>800–1,000 cells<br>Metrics: <br>AUROC :0.93<br>AUPRC: 0.86</td><td><a href="https://github.com/sindhura-cs/scRegNet" target="_blank">Link</a></td><td>Yes</td><td></td></tr>
+                        <tr><td><strong>DigNet / RegDiffusion</strong></td><td>GRN inference</td><td>Diffusion Models</td><td>Unsupervised</td><td>Conceptualize network inference as a reversible denoising process, representing a new wave of generative frameworks for GRN inference.</td><td>Inputs: omics<br>data scale:<br>thousands of cells<br>Metrics: <br>AUPRC：up 19–32%</td><td><a href="https://github.com/zpliulab/DigNet" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GRNFormer</strong></td><td>GRN inference</td><td>Graph Transformer</td><td>Semi-supervised</td><td>Uses a sophisticated graph transformer pipeline to infer regulatory relationships with high accuracy.</td><td>Inputs: omics<br>data scale: <br>500–5,900 genes<br>Metrics: AUROC/AUPRC：0.90–0.98</td><td><a href="https://github.com/BioinfoMachineLearning/GRNformer" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>GeneCompass</strong></td><td>Cross-Species Analysis</td><td>Knowledge-informed Transformer (FM)</td><td>Self-supervised</td><td>A large-scale model pre-trained on human and mouse cells to decipher universal gene regulatory mechanisms for cross-species tasks.</td><td>Inputs: omics<br>data scale: <br>126M cells<br>Metrics:<br>AUC≈.0.95<br>Annotations accuracy：0.84–0.87</td><td><a href="https://github.com/xCompass-AI/GeneCompass" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CACIMAR</strong></td><td>Cross-Species Analysis</td><td>Weighted Sum Model</td><td>Self-supervised / unsupervised</td><td>Systematically quantifies the conservation score of cell types, markers, and interactions based on homologous features.</td><td>Inputs: omics<br>data scale: <br>80,777 cells<br>Metrics: R2 > 0.66</td><td><a href="https://github.com/jiang-junyao/CACIMAR" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>Nvwa</strong></td><td>Cross-Species Analysis</td><td>Deep Learning on DNA Sequences</td><td>Self-supervised / unsupervised</td><td>Predicts cell-specific gene expression from DNA sequences, allowing it to identify conserved regulatory programs across species.</td><td>Inputs: omics<br>data scale: <br>635k cells<br>Metrics: <br>AUROC = 0.78<br>AUPR = 0.59</td><td><a href="https://github.com/JiaqiLiZju/Nvwa/" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>CAME</strong></td><td>Cross-Species Analysis</td><td>Heterogeneous Graph Neural Network (GNN)</td><td>Self-supervised / unsupervised</td><td>Directly assigns cell types across species from scRNA-seq data and provides quantitative assignment probabilities.</td><td>Inputs: omics<br>data scale: <br>Million cells<br>Metrics: <br>Accuracy ≈ 0.87</td><td><a href="https://github.com/zhanglabtools/CAME" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                        <tr><td><strong>SATURN</strong></td><td>Cross-Species Analysis</td><td>Protein Language Model (PLM) Integration</td><td>Weakly supervised</td><td>Enables cell alignment based on functional protein similarity, which is often more conserved across species than gene sequences.</td><td>Inputs: omics<br>data scale: <br>335,000 cells<br>Metrics: <br>accuracy ≈ 0.8<br>ARI / NMI > 0.8</td><td><a href="https://github.com/snap-stanford/saturn" target="_blank">Link</a></td><td>Yes</td><td>Yes</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        <!-- Additional Info -->
+<div class="table-container">
+    <h2>📊 Analysis Summary</h2>
+    <ul style="list-style-position: inside; line-height: 2;">
+        <li><strong>Total Methods Reviewed:</strong> 84</li>
+        <li><strong>Primary Applications (by frequency):</strong> 
+            <ul style="margin-left: 20px; list-style-type: circle;">
+                <li>Cell Annotation (21 methods, 25%)</li>
+                <li>Denoising & Imputation (16 methods, 19%)</li>
+                <li>Batch Effect Correction (16 methods, 19%)</li>
+                <li>GRN Inference (11 methods, 13%)</li>
+                <li>Dimension Reduction (9 methods, 11%)</li>
+                <li>Trajectory Inference (7 methods, 8%)</li>
+                <li>Cross-Species Analysis (6 methods, 7%)</li>
+                <li>Cell Clustering (6 methods, 7%)</li>
+                <li>Doublet Removal (2 methods, 2%)</li>
+            </ul>
+        </li>
+        <li><strong>Supervision Distribution:</strong> Unsupervised (46 methods, ~55%), Self-supervised (12 methods, ~14%), Semi-supervised (11 methods, ~13%), Supervised (13 methods, ~16%), Weakly-supervised (2 methods, ~2%)</li>
+        <li><strong>Unsupervised + Self-supervised:</strong> 58/84 (69%)</li>
+<li><strong>Code Availability:</strong> 82/84 (97.6%) link to public repositories</li>
+<li><strong>Installation Docs:</strong> 72/84 (85.7%)</li>
+<li><strong>Tutorials:</strong> 69/84 (82.1%)</li>
+<li><strong>Both Install + Tutorial:</strong> 69/84 (82.1%)</li>
+        <li><strong>Multi-task Methods:</strong> 8 methods (10%) address multiple applications simultaneously (e.g., scVI, totalVI, SAUCIE, scDHA, ZILLNB, CarDEC, DESC, scArches)</li>
+        <li><strong>Notable Trends:</strong> 
+            <ul style="margin-left: 20px; list-style-type: circle;">
+                <li>Foundation model integration emerging in annotation (scTab: 22M cells, Celler: 10M cells) and GRN inference (scGREAT, scRegNet)</li>
+                <li>VAE-based architectures dominate across tasks (26 methods, 31%)</li>
+                <li>GNN-based approaches increasingly popular for preserving cell-cell relationships (12 methods, 14%)</li>
+                <li>Growing adoption of diffusion models (scIDPMs, DigNet, RegDiffusion) and transformers (TOSICA, GRNFormer) in recent methods</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+    </main>
+
+    <script>
+        // Collapsible table functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.table-container table tbody');
+            if (!table) return;
+
+            const rows = table.querySelectorAll('tr');
+            rows.forEach((row, index) => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length !== 9) return;
+
+                // Extract data
+                const method = cells[0].innerHTML;
+                const application = cells[1].textContent;
+                const model = cells[2].innerHTML;
+                const supervision = cells[3].textContent;
+                const features = cells[4].innerHTML;
+                const experimental = cells[5].innerHTML;
+                const code = cells[6].innerHTML;
+                const installation = cells[7].textContent.trim();
+                const tutorials = cells[8].textContent.trim();
+
+                // Create main row (collapsed view)
+                row.className = 'method-row';
+                row.innerHTML = `
+                    <td>${method}</td>
+                    <td>${application}</td>
+                    <td>${supervision}</td>
+                    <td>${code}</td>
+                `;
+
+                // Create detail row (expanded view)
+                const detailRow = document.createElement('tr');
+                detailRow.className = 'detail-row';
+                detailRow.innerHTML = `
+                    <td colspan="4">
+                        <div class="detail-content">
+                            <h4>📋 Detailed Information</h4>
+                            <p><strong>Model/Architecture:</strong> ${model}</p>
+                            <p><strong>Key Features:</strong> ${features}</p>
+                            <p><strong>Experimental Profile:</strong> ${experimental}</p>
+                            <p><strong>Installation:</strong> ${installation ? '<span class="badge badge-yes">Available</span>' : '<span class="badge badge-no">N/A</span>'}</p>
+                            <p><strong>Tutorials:</strong> ${tutorials ? '<span class="badge badge-yes">Available</span>' : '<span class="badge badge-no">N/A</span>'}</p>
+                        </div>
+                    </td>
+                `;
+
+                // Insert detail row after main row
+                row.parentNode.insertBefore(detailRow, row.nextSibling);
+
+                // Add click event
+                row.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                    detailRow.classList.toggle('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+

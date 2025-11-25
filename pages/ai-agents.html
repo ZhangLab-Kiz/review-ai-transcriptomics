@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents - AI in Transcriptomics</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="../assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AI in Transcriptomics</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Task-specific Methods</a>
+                    <div class="dropdown-content">
+                        <a href="scrna-seq-methods.html">scRNA-seq Methods</a>
+                        <a href="st-methods.html">ST Methods</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">Advanced Paradigms</a>
+                    <div class="dropdown-content">
+                        <a href="foundation-models.html">Foundation Models</a>
+                        <a href="ai-agents.html">AI Agents</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="more.html" class="nav-link">More</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">AI Agents in Transcriptomics</h1>
+        <p class="page-description">
+            AI agents represent the frontier of transcriptomics analysis, integrating large language models with specialized computational pipelines 
+            to automate complex, multi-step analytical workflows. These systems can understand natural language instructions from users, 
+            decompose analysis tasks into actionable steps, execute specialized tools, and iterate based on feedback—without requiring users to 
+            manually chain individual methods. Our review identifies 5 emerging AI agent systems designed for transcriptomics applications.
+        </p>
+
+        <!-- Table Section -->
+        <div class="table-container" id="table-d">
+            <h2>Table D: AI Agents in Transcriptomics</h2>
+            <p style="color: #666; margin-bottom: 1rem; font-size: 0.95rem;">
+                <strong>Column Descriptions:</strong> Tool - Agent system name | Computational Requirements - Resource needs for operation | 
+                Usage - Deployment mode (Local/API/Web) | Online Service - Web interface availability | Features - Key capabilities and characteristics | Code - GitHub repository link
+            </p>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Computational Requirements</th>
+                            <th>Usage</th>
+                            <th>Online Service</th>
+                            <th>Features</th>
+                            <th>Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>STAgent</strong></td>
+                            <td>Medium</td>
+                            <td>Local deployment/API</td>
+                            <td>Not provided</td>
+                            <td>Enables human-AI collaboration and supports full spatial biology workflows, including experimental design, multimodal data analysis, and hypothesis generation.</td>
+                            <td><a href="https://github.com/LiuLab-Bioelectronics-Harvard/STAgent" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SpatialAgent</strong></td>
+                            <td>Usage under construction</td>
+                            <td>Usage under construction</td>
+                            <td>Not provided</td>
+                            <td>Supports human-AI collaboration and is capable of handling the entire spatial biology research workflow, from experimental design and multimodal data analysis to hypothesis generation.</td>
+                            <td><a href="https://github.com/Genentech/SpatialAgent" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>CellAgent</strong></td>
+                            <td>Low</td>
+                            <td>Web mode</td>
+                            <td><a href="http://cell.agent4science.cn/" target="_blank">Provided</a></td>
+                            <td>Employs multi-agent collaborative decision-making to simulate a "deep reasoning" process, enabling task decomposition, execution, and optimization in a closed-loop manner. It also incorporates the sc-Omni toolkit for efficient tool integration.</td>
+                            <td>Not public</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CompBioAgent</strong></td>
+                            <td>Medium</td>
+                            <td>Local deployment/API</td>
+                            <td><a href="https://apps.bxgenomics.com/compbioagent/app/core/app_ai_assistant_chat.php" target="_blank">Provided</a></td>
+                            <td>Fully operated through natural language with zero programming requirements. Integrates tools such as Cellxgene VIP and CellDepot for querying and visualizing various diseases and cell types.</td>
+                            <td><a href="https://github.com/interactivereport/CompBioAgent" target="_blank">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AutoBA</strong></td>
+                            <td>Low (API)/ High (Local Deploy)</td>
+                            <td>Local deployment/API</td>
+                            <td>Not provided</td>
+                            <td>Applicable to both spatial transcriptomics and multi-omics; highly automated, user-friendly, and compatible with emerging bioinformatics tools.</td>
+                            <td><a href="https://github.com/JoshuaChou2018/AutoBA" target="_blank">GitHub</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p class="page-description" style="background-color: #f0f4f8; padding: 1rem; border-radius: 5px; margin-bottom: 2rem;">
+            <strong>Key Insights:</strong> AI agents represent an emerging paradigm in transcriptomics, with 5 systems currently available offering diverse accessibility models. 
+            <strong>Code Accessibility:</strong> 80% (4/5) provide public GitHub repositories (STAgent, SpatialAgent, CompBioAgent, AutoBA), though CellAgent remains proprietary. 
+            <strong>Deployment Models:</strong> 40% (2/5) offer web-based interfaces (CellAgent, CompBioAgent) enabling zero-setup access, while 60% (3/5) support local deployment for data privacy and customization. 
+            <strong>Computational Requirements:</strong> Range from low (CellAgent web mode) to high (AutoBA local deployment), with most supporting flexible API-based access. 
+            <strong>Spatial Biology Focus:</strong> 60% (3/5) explicitly target spatial transcriptomics workflows (STAgent, SpatialAgent, AutoBA), reflecting the field's growing emphasis on spatial context. 
+            <strong>Human-AI Collaboration:</strong> Multiple agents (STAgent, SpatialAgent, CellAgent) emphasize collaborative decision-making rather than full automation, enabling researchers to guide and refine analyses iteratively. 
+            Note that SpatialAgent is under construction, and accessibility details may evolve as the field matures.
+        </p>
+
+        <!-- Additional Info -->
+        <div class="table-container">
+            <h2>📊 AI Agent Landscape Analysis</h2>
+            <ul style="list-style-position: inside; line-height: 2;">
+                <li><strong>Total Systems Reviewed:</strong> 5 AI agents</li>
+                <li><strong>Code Availability:</strong> 4/5 (80%) provide GitHub repositories; 1/5 (20%) proprietary (CellAgent)</li>
+                <li><strong>Online Services:</strong> 2/5 (40%) offer web interfaces (CellAgent, CompBioAgent)</li>
+                <li><strong>Deployment Flexibility:</strong> 3/5 (60%) support local deployment + API access (STAgent, CompBioAgent, AutoBA)</li>
+                <li><strong>Spatial Transcriptomics Support:</strong> 3/5 (60%) explicitly designed for spatial biology workflows</li>
+                <li><strong>Computational Spectrum:</strong> 
+                    <ul style="margin-left: 30px; list-style-type: circle;">
+                        <li>Low: CellAgent (web mode)</li>
+                        <li>Medium: STAgent, CompBioAgent</li>
+                        <li>Variable: AutoBA (Low for API, High for local)</li>
+                        <li>Under construction: SpatialAgent</li>
+                    </ul>
+                </li>
+                <li><strong>Key Capabilities:</strong> Natural language understanding, automated tool orchestration, multi-agent collaboration (CellAgent), full workflow support (experimental design → hypothesis generation), integration with specialized toolkits (sc-Omni, Cellxgene VIP)</li>
+                <li><strong>Research Paradigm Shift:</strong> Moving from single-task automation to end-to-end research assistant systems that combine task-specific methods, foundation models, and LLMs for comprehensive analysis with minimal programming requirements</li>
+            </ul>
+        </div>
+
+        <!-- Agent Workflow Diagram -->
+        <div class="table-container">
+            <h2>Typical AI Agent Workflow</h2>
+            <div style="background-color: #f9f9f9; padding: 1.5rem; border-radius: 5px; border-left: 4px solid #3498db;">
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                    <div style="text-align: center; flex: 1; min-width: 150px;">
+                        <div style="background-color: #3498db; color: white; padding: 1rem; border-radius: 5px; font-weight: bold; margin-bottom: 0.5rem;">
+                            1. User Input
+                        </div>
+                        <p style="font-size: 0.9rem;">Natural language analysis request</p>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #3498db;">→</div>
+                    <div style="text-align: center; flex: 1; min-width: 150px;">
+                        <div style="background-color: #3498db; color: white; padding: 1rem; border-radius: 5px; font-weight: bold; margin-bottom: 0.5rem;">
+                            2. LLM Processing
+                        </div>
+                        <p style="font-size: 0.9rem;">Parse task requirements</p>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #3498db;">→</div>
+                    <div style="text-align: center; flex: 1; min-width: 150px;">
+                        <div style="background-color: #3498db; color: white; padding: 1rem; border-radius: 5px; font-weight: bold; margin-bottom: 0.5rem;">
+                            3. Tool Selection
+                        </div>
+                        <p style="font-size: 0.9rem;">Choose methods/models</p>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #3498db;">→</div>
+                    <div style="text-align: center; flex: 1; min-width: 150px;">
+                        <div style="background-color: #3498db; color: white; padding: 1rem; border-radius: 5px; font-weight: bold; margin-bottom: 0.5rem;">
+                            4. Execution
+                        </div>
+                        <p style="font-size: 0.9rem;">Run analysis pipeline</p>
+                    </div>
+                    <div style="font-size: 1.5rem; color: #3498db;">→</div>
+                    <div style="text-align: center; flex: 1; min-width: 150px;">
+                        <div style="background-color: #3498db; color: white; padding: 1rem; border-radius: 5px; font-weight: bold; margin-bottom: 0.5rem;">
+                            5. Results & Insights
+                        </div>
+                        <p style="font-size: 0.9rem;">Visualizations & reports</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AI in Transcriptomics Review</p>
+        <p><a href="more.html">Contact & More Information</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Page loaded - charts are static for AI Agents page
+            console.log('AI Agents page loaded');
+        });
+    </script>
+</body>
+</html>
